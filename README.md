@@ -1,2 +1,2 @@
-# IMDB Elokuvalista (Flutter)
+#Elokuva App (Flutter)
 
