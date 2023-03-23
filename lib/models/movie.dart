@@ -13,18 +13,18 @@ class MovieList {
     if (json['results'] != null) {
       movies = [];
       json['results'].forEach((v) {
-        movies!.add(new Movie.fromJson(v));
+        movies!.add(Movie.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['page'] = this.page;
-    data['total_results'] = this.totalMovies;
-    data['total_pages'] = this.totalPages;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['page'] = page;
+    data['total_results'] = totalMovies;
+    data['total_pages'] = totalPages;
     if (this.movies != null) {
-      data['results'] = this.movies!.map((v) => v.toJson()).toList();
+      data['results'] = movies!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -80,21 +80,21 @@ class Movie {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['vote_count'] = this.voteCount;
-    data['id'] = this.id;
-    data['video'] = this.video;
-    data['vote_average'] = this.voteAverage;
-    data['title'] = this.title;
-    data['popularity'] = this.popularity;
-    data['poster_path'] = this.posterPath;
-    data['original_language'] = this.originalLanguage;
-    data['original_title'] = this.originalTitle;
-    data['genre_ids'] = this.genreIds;
-    data['backdrop_path'] = this.backdropPath;
-    data['adult'] = this.adult;
-    data['overview'] = this.overview;
-    data['release_date'] = this.releaseDate;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['vote_count'] = voteCount;
+    data['id'] = id;
+    data['video'] = video;
+    data['vote_average'] = voteAverage;
+    data['title'] = title;
+    data['popularity'] = popularity;
+    data['poster_path'] = posterPath;
+    data['original_language'] = originalLanguage;
+    data['original_title'] = originalTitle;
+    data['genre_ids'] = genreIds;
+    data['backdrop_path'] = backdropPath;
+    data['adult'] = adult;
+    data['overview'] = overview;
+    data['release_date'] = releaseDate;
     return data;
   }
 }

@@ -8,8 +8,8 @@ class GenreMovies extends StatelessWidget {
   final Genres genre;
   final List<Genres> genres;
 
-  GenreMovies(
-      {required this.themeData, required this.genre, required this.genres});
+  const GenreMovies(
+      {super.key, required this.themeData, required this.genre, required this.genres});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,12 +17,12 @@ class GenreMovies extends StatelessWidget {
         backgroundColor: themeData.primaryColor,
         title: Text(
           genre.name!,
-          style: themeData.textTheme.headline5,
+          style: themeData.textTheme.headlineSmall,
         ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: themeData.accentColor,
+            color: themeData.colorScheme.secondary,
           ),
           onPressed: () {
             Navigator.pop(context);

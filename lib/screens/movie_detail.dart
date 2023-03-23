@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:movie_thing/api/endpoints.dart';
 import 'package:movie_thing/constats/api_constats.dart';
@@ -6,13 +8,16 @@ import 'package:movie_thing/models/genres.dart';
 import 'package:movie_thing/models/movie.dart';
 import 'package:movie_thing/screens/widgets.dart';
 
+//SIVU MISSÄ NÄKEE LEFFAN TIEDOT KUN KUVAKETTA KLIKATTU
+
 class MovieDetailPage extends StatefulWidget {
   final Movie movie;
   final ThemeData themeData;
   final String heroId;
   final List<Genres> genres;
-  MovieDetailPage(
-      {required this.movie,
+
+  const MovieDetailPage(
+      {super.key, required this.movie,
       required this.themeData,
       required this.heroId,
       required this.genres});
@@ -21,8 +26,18 @@ class MovieDetailPage extends StatefulWidget {
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
+  bool isFavorite = false;
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    Color favoriteColor = isFavorite ? Colors.red : Colors.white;
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -44,7 +59,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 widget.movie.backdropPath!),
                             fit: BoxFit.cover,
                             placeholder:
-                                AssetImage('assets/images/loading.gif'),
+                                const AssetImage('assets/images/loading.gif'),
                           ),
                     Container(
                       decoration: BoxDecoration(
@@ -53,12 +68,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                               begin: FractionalOffset.bottomCenter,
                               end: FractionalOffset.topCenter,
                               colors: [
-                                widget.themeData.accentColor,
-                                widget.themeData.accentColor.withOpacity(0.3),
-                                widget.themeData.accentColor.withOpacity(0.2),
-                                widget.themeData.accentColor.withOpacity(0.1),
+                                widget.themeData.colorScheme.secondary,
+                                widget.themeData.colorScheme.secondary.withOpacity(0.3),
+                                widget.themeData.colorScheme.secondary.withOpacity(0.2),
+                                widget.themeData.colorScheme.secondary.withOpacity(0.1),
                               ],
-                              stops: [
+                              stops: const [
                                 0.0,
                                 0.25,
                                 0.5,
@@ -70,7 +85,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               ),
               Expanded(
                 child: Container(
-                  color: widget.themeData.accentColor,
+                  color: widget.themeData.colorScheme.secondary,
                 ),
               )
             ],
@@ -83,7 +98,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back,
-                    color: widget.themeData.accentColor,
+                    color: widget.themeData.colorScheme.secondary,
                   ),
                   onPressed: () {
                     Navigator.pop(context);
@@ -121,7 +136,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                         Text(
                                           widget.movie.title!,
                                           style: widget
-                                              .themeData.textTheme.headline5,
+                                              .themeData.textTheme.headlineSmall,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -132,11 +147,20 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               Text(
                                                 widget.movie.voteAverage!,
                                                 style: widget.themeData
-                                                    .textTheme.bodyText1,
+                                                    .textTheme.bodyLarge,
                                               ),
-                                              Icon(
+                                              const Icon(
                                                 Icons.star,
-                                                color: Colors.green,
+                                                color: Colors.yellow,
+                                              ),
+                                              IconButton(
+                                                icon: Icon(
+                                                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                                                  color : favoriteColor,
+                                                ),
+                                                onPressed: () {
+                                                  toggleFavorite();
+                                                },
                                               ),
                                             ],
                                           ),
@@ -147,7 +171,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 ),
                                 Expanded(
                                   child: SingleChildScrollView(
-                                    physics: BouncingScrollPhysics(),
+                                    physics: const BouncingScrollPhysics(),
                                     child: Column(
                                       children: <Widget>[
                                         widget.genres.isEmpty
@@ -166,7 +190,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               child: Text(
                                                 'Overview',
                                                 style: widget.themeData
-                                                    .textTheme.bodyText1,
+                                                    .textTheme.bodyLarge,
                                               ),
                                             ),
                                           ],
@@ -176,7 +200,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                           child: Text(
                                             widget.movie.overview!,
                                             style: widget
-                                                .themeData.textTheme.caption,
+                                                .themeData.textTheme.bodySmall,
                                           ),
                                         ),
                                         Row(
@@ -187,7 +211,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               child: Text(
                                                 'Release date : ${widget.movie.releaseDate}',
                                                 style: widget.themeData
-                                                    .textTheme.bodyText1,
+                                                    .textTheme.bodyLarge,
                                               ),
                                             ),
                                           ],
@@ -231,7 +255,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                           'w500/' +
                                           widget.movie.posterPath!),
                                       fit: BoxFit.cover,
-                                      placeholder: AssetImage(
+                                      placeholder: const AssetImage(
                                           'assets/images/loading.gif'),
                                     ),
                             ),
@@ -265,9 +289,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       padding: const EdgeInsets.only(top: 54),
                       decoration: BoxDecoration(
                           color: widget.themeData.primaryColor,
-                          borderRadius: new BorderRadius.only(
-                              topLeft: const Radius.circular(16.0),
-                              topRight: const Radius.circular(16.0))),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16.0),
+                              topRight: Radius.circular(16.0))),
                       child: Center(
                         child: ListView(
                           children: <Widget>[
@@ -277,15 +301,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 children: <Widget>[
                                   Text(
                                     '${cast.name}',
-                                    style: widget.themeData.textTheme.bodyText2,
+                                    style: widget.themeData.textTheme.bodyMedium,
                                   ),
                                   Text(
                                     'as',
-                                    style: widget.themeData.textTheme.bodyText2,
+                                    style: widget.themeData.textTheme.bodyMedium,
                                   ),
                                   Text(
                                     '${cast.character}',
-                                    style: widget.themeData.textTheme.bodyText2,
+                                    style: widget.themeData.textTheme.bodyMedium,
                                   ),
                                 ],
                               ),
@@ -303,11 +327,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                         decoration: BoxDecoration(
                             color: widget.themeData.primaryColor,
                             border: Border.all(
-                                color: widget.themeData.accentColor, width: 3),
+                                color: widget.themeData.colorScheme.secondary, width: 3),
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: (cast.profilePath == null
-                                        ? AssetImage('assets/images/na.jpg')
+                                        ? const AssetImage('assets/images/na.jpg')
                                         : NetworkImage(TMDB_BASE_IMAGE_URL +
                                             'w500/' +
                                             cast.profilePath!))

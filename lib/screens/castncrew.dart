@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:flutter/material.dart';
 import 'package:movie_thing/constats/api_constats.dart';
 import 'package:movie_thing/models/credits.dart';
@@ -5,7 +7,7 @@ import 'package:movie_thing/models/credits.dart';
 class CastAndCrew extends StatelessWidget {
   final ThemeData? themeData;
   final Credits? credits;
-  CastAndCrew({this.themeData, this.credits});
+  const CastAndCrew({super.key, this.themeData, this.credits});
 
   @override
   Widget build(BuildContext context) {
@@ -16,30 +18,30 @@ class CastAndCrew extends StatelessWidget {
           backgroundColor: themeData!.primaryColor,
           bottom: TabBar(
             indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: themeData!.accentColor,
+            indicatorColor: themeData!.colorScheme.secondary,
             tabs: [
               Tab(
                 child: Text(
                   'Cast',
-                  style: themeData!.textTheme.bodyText1,
+                  style: themeData!.textTheme.bodyLarge,
                 ),
               ),
               Tab(
                 child: Text(
                   'Crew',
-                  style: themeData!.textTheme.bodyText1,
+                  style: themeData!.textTheme.bodyLarge,
                 ),
               ),
             ],
           ),
           title: Text(
             'Cast And Crew',
-            style: themeData!.textTheme.headline5,
+            style: themeData!.textTheme.headlineSmall,
           ),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: themeData!.accentColor,
+              color: themeData!.colorScheme.secondary,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -58,7 +60,7 @@ class CastAndCrew extends StatelessWidget {
       padding: const EdgeInsets.only(left: 8.0, top: 8.0),
       color: themeData!.primaryColor,
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemCount: credits!.cast!.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
@@ -82,7 +84,7 @@ class CastAndCrew extends StatelessWidget {
                                 credits!.cast![index].profilePath!),
                             fit: BoxFit.cover,
                             placeholder:
-                                AssetImage('assets/images/loading.gif'),
+                                const AssetImage('assets/images/loading.gif'),
                           ),
                   ),
                 ),
@@ -95,12 +97,12 @@ class CastAndCrew extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Name : ' + credits!.cast![index].name!,
-                          style: themeData!.textTheme.bodyText2,
+                          style: themeData!.textTheme.bodyMedium,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           'Character : ' + credits!.cast![index].character!,
-                          style: themeData!.textTheme.bodyText1,
+                          style: themeData!.textTheme.bodyLarge,
                         ),
                       ],
                     ),
@@ -119,7 +121,7 @@ class CastAndCrew extends StatelessWidget {
       padding: const EdgeInsets.only(left: 8.0, top: 8.0),
       color: themeData!.primaryColor,
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemCount: credits!.crew!.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
@@ -143,7 +145,7 @@ class CastAndCrew extends StatelessWidget {
                                 credits!.crew![index].profilePath!),
                             fit: BoxFit.cover,
                             placeholder:
-                                AssetImage('assets/images/loading.gif'),
+                                const AssetImage('assets/images/loading.gif'),
                           ),
                   ),
                 ),
@@ -156,12 +158,12 @@ class CastAndCrew extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Name : ' + credits!.crew![index].name!,
-                          style: themeData!.textTheme.bodyText2,
+                          style: themeData!.textTheme.bodyMedium,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           'Job : ' + credits!.crew![index].job!,
-                          style: themeData!.textTheme.bodyText1,
+                          style: themeData!.textTheme.bodyLarge,
                         ),
                       ],
                     ),
