@@ -1,3 +1,2 @@
-# IMDB Elokuvalista (Flutter)
+#Elokuva App (Flutter)
 
-Mobiilisovellus jolla voidaan etsiä elokuvia IMDB-tietokannasta.
