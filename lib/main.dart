@@ -10,8 +10,6 @@ import 'package:movie_thing/screens/settings.dart';
 import 'package:movie_thing/screens/widgets.dart';
 import 'package:movie_thing/theme/theme_state.dart';
 
-
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
