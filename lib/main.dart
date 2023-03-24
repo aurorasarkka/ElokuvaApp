@@ -8,7 +8,7 @@ import 'package:movie_thing/models/movie.dart';
 import 'package:movie_thing/models/functions.dart';
 import 'package:movie_thing/screens/movie_detail.dart';
 import 'package:movie_thing/screens/search_view.dart';
-import 'package:movie_thing/screens/settings.dart';
+import 'package:movie_thing/screens/welcome.dart';
 import 'package:movie_thing/screens/widgets.dart';
 import 'package:movie_thing/theme/theme_state.dart';
 
@@ -95,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      drawer: const Drawer(
-        child: SettingsPage(),
+      drawer:  Drawer(
+        child: WelcomePage(),
       ),
       body: Container(
         color: state.themeData.primaryColor,

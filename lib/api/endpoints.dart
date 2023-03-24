@@ -18,7 +18,7 @@ class Endpoints {
   }
 
   static String getCreditsUrl(int id) {
-    return '$TMDB_API_BASE_URL' + '/movie/$id/credits?api_key=$TMDB_API_KEY';
+    return '$TMDB_API_BASE_URL' '/movie/$id/credits?api_key=$TMDB_API_KEY';
   }
 
   static String topRatedUrl(int page) {
