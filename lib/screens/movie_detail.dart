@@ -17,7 +17,8 @@ class MovieDetailPage extends StatefulWidget {
   final List<Genres> genres;
 
   const MovieDetailPage(
-      {super.key, required this.movie,
+      {super.key,
+      required this.movie,
       required this.themeData,
       required this.heroId,
       required this.genres});
@@ -69,9 +70,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                               end: FractionalOffset.topCenter,
                               colors: [
                                 widget.themeData.colorScheme.secondary,
-                                widget.themeData.colorScheme.secondary.withOpacity(0.3),
-                                widget.themeData.colorScheme.secondary.withOpacity(0.2),
-                                widget.themeData.colorScheme.secondary.withOpacity(0.1),
+                                widget.themeData.colorScheme.secondary
+                                    .withOpacity(0.3),
+                                widget.themeData.colorScheme.secondary
+                                    .withOpacity(0.2),
+                                widget.themeData.colorScheme.secondary
+                                    .withOpacity(0.1),
                               ],
                               stops: const [
                                 0.0,
@@ -135,8 +139,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                       children: <Widget>[
                                         Text(
                                           widget.movie.title!,
-                                          style: widget
-                                              .themeData.textTheme.headlineSmall,
+                                          style: widget.themeData.textTheme
+                                              .headlineSmall,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -155,8 +159,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               ),
                                               IconButton(
                                                 icon: Icon(
-                                                  isFavorite ? Icons.favorite : Icons.favorite_border,
-                                                  color : favoriteColor,
+                                                  isFavorite
+                                                      ? Icons.favorite
+                                                      : Icons.favorite_border,
+                                                  color: favoriteColor,
                                                 ),
                                                 onPressed: () {
                                                   toggleFavorite();
@@ -301,15 +307,18 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 children: <Widget>[
                                   Text(
                                     '${cast.name}',
-                                    style: widget.themeData.textTheme.bodyMedium,
+                                    style:
+                                        widget.themeData.textTheme.bodyMedium,
                                   ),
                                   Text(
                                     'as',
-                                    style: widget.themeData.textTheme.bodyMedium,
+                                    style:
+                                        widget.themeData.textTheme.bodyMedium,
                                   ),
                                   Text(
                                     '${cast.character}',
-                                    style: widget.themeData.textTheme.bodyMedium,
+                                    style:
+                                        widget.themeData.textTheme.bodyMedium,
                                   ),
                                 ],
                               ),
@@ -327,15 +336,16 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                         decoration: BoxDecoration(
                             color: widget.themeData.primaryColor,
                             border: Border.all(
-                                color: widget.themeData.colorScheme.secondary, width: 3),
+                                color: widget.themeData.colorScheme.secondary,
+                                width: 3),
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: (cast.profilePath == null
-                                        ? const AssetImage('assets/images/na.jpg')
-                                        : NetworkImage(TMDB_BASE_IMAGE_URL +
-                                            'w500/' +
-                                            cast.profilePath!))
-                                    as ImageProvider<Object>),
+                                    ? const AssetImage('assets/images/na.jpg')
+                                    : NetworkImage(TMDB_BASE_IMAGE_URL +
+                                        'w500/' +
+                                        cast.profilePath!)) as ImageProvider<
+                                    Object>),
                             shape: BoxShape.circle),
                       ),
                     ))

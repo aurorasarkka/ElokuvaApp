@@ -144,12 +144,6 @@ class _MyHomePageState extends State<MyHomePage> {
               api: Endpoints.nowPlayingMoviesUrl(1),
               genres: _genres,
             ),
-            // ScrollingMovies(
-            //   themeData: state.themeData,
-            //   title: 'Upcoming Movies',
-            //   api: Endpoints.upcomingMoviesUrl(1),
-            //   genres: _genres,
-            // ),
             ScrollingMovies(
               themeData: state.themeData,
               title: 'Popular',

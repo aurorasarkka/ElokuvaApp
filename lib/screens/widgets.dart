@@ -578,6 +578,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
   Widget build(BuildContext context) {
     return Container(
       color: widget.themeData!.primaryColor,
+      // ignore: sort_child_properties_last
       child: moviesList == null
           ? Center(
               child: CircularProgressIndicator(),

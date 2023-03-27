@@ -21,6 +21,14 @@ class ForgotPassword extends StatelessWidget {
                 height: MediaQuery.of(context).size.height,
                 fit: BoxFit.cover,
               ),
+              IconButton(
+                padding: const EdgeInsets.only(right: 850, bottom: 650),
+                icon: const Icon(Icons.arrow_back_ios),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.26),
               const Text("Coming soon...",
                   style: TextStyle(
