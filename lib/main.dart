@@ -11,6 +11,7 @@ import 'package:movie_thing/screens/search_view.dart';
 import 'package:movie_thing/screens/welcome.dart';
 import 'package:movie_thing/screens/widgets.dart';
 import 'package:movie_thing/theme/theme_state.dart';
+import 'package:movie_thing/screens/favorites.dart';
 
 void main() => runApp(const MyApp());
 
@@ -53,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<ThemeState>(context);
-
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -73,6 +73,31 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: state.themeData.primaryColor,
         actions: <Widget>[
+          //RANDOM ELOKUVA -PAINIKE
+          IconButton(
+            color: state.themeData.colorScheme.secondary,
+            icon: const Icon(Icons.shuffle),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Favorites()),
+              );
+            },
+          ),
+
+          //SUOSIKIT/KÄYTTÄJÄ -PAINIKE
+          IconButton(
+            color: state.themeData.colorScheme.secondary,
+            icon: const Icon(Icons.account_circle),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Favorites()),
+              );
+            },
+          ),
+
+          //HAKU -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
             icon: const Icon(Icons.search),

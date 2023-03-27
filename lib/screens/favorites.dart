@@ -1,7 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
-class Facebook extends StatelessWidget {
-  const Facebook({super.key});
+class Favorites extends StatelessWidget {
+  const Favorites({super.key});
 
   @override
   Widget build(BuildContext context) {
