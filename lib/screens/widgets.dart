@@ -12,13 +12,11 @@ import 'package:movie_thing/models/movie.dart';
 import 'package:movie_thing/models/functions.dart';
 import 'package:movie_thing/screens/movie_detail.dart';
 
-
-
-
 class DiscoverMovies extends StatefulWidget {
   final ThemeData themeData;
   final List<Genres> genres;
-  const DiscoverMovies({super.key, required this.themeData, required this.genres});
+  const DiscoverMovies(
+      {super.key, required this.themeData, required this.genres});
   @override
   _DiscoverMoviesState createState() => _DiscoverMoviesState();
 }
@@ -44,8 +42,8 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child:
-                  Text('Discover', style: widget.themeData.textTheme.headlineSmall),
+              child: Text('Discover',
+                  style: widget.themeData.textTheme.headlineSmall),
             ),
           ],
         ),
@@ -107,7 +105,11 @@ class ScrollingMovies extends StatefulWidget {
   final String? api, title;
   final List<Genres> genres;
   const ScrollingMovies(
-      {super.key, required this.themeData, this.api, this.title, required this.genres});
+      {super.key,
+      required this.themeData,
+      this.api,
+      this.title,
+      required this.genres});
   @override
   _ScrollingMoviesState createState() => _ScrollingMoviesState();
 }
@@ -210,7 +212,10 @@ class ParticularGenreMovies extends StatefulWidget {
   final String api;
   final List<Genres> genres;
   const ParticularGenreMovies(
-      {super.key, required this.themeData, required this.api, required this.genres});
+      {super.key,
+      required this.themeData,
+      required this.api,
+      required this.genres});
   @override
   _ParticularGenreMoviesState createState() => _ParticularGenreMoviesState();
 }
@@ -252,7 +257,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                   genres: widget.genres,
                                   heroId: '${moviesList![index].id}')));
                     },
-                    child: Container(
+                    child: SizedBox(
                       height: 150,
                       child: Stack(
                         children: <Widget>[
@@ -265,7 +270,8 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                   borderRadius: BorderRadius.circular(8.0),
                                   border: Border.all(
                                       width: 1,
-                                      color: widget.themeData.colorScheme.secondary)),
+                                      color: widget
+                                          .themeData.colorScheme.secondary)),
                               height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.only(
@@ -337,8 +343,13 @@ class ScrollingArtists extends StatefulWidget {
   final ThemeData? themeData;
   final String? api, title, tapButtonText;
   final Function(Cast)? onTap;
-  ScrollingArtists(
-      {this.themeData, this.api, this.title, this.tapButtonText, this.onTap});
+  const ScrollingArtists(
+      {super.key,
+      this.themeData,
+      this.api,
+      this.title,
+      this.tapButtonText,
+      this.onTap});
   @override
   _ScrollingArtistsState createState() => _ScrollingArtistsState();
 }
@@ -464,7 +475,8 @@ class GenreList extends StatefulWidget {
   final List<int> genres;
   final List<Genres> totalGenres;
   const GenreList(
-      {super.key, required this.themeData,
+      {super.key,
+      required this.themeData,
       required this.genres,
       required this.totalGenres});
 
@@ -544,7 +556,8 @@ class SearchMovieWidget extends StatefulWidget {
   final String? query;
   final List<Genres>? genres;
   final Function(Movie)? onTap;
-  const SearchMovieWidget({super.key, this.themeData, this.query, this.genres, this.onTap});
+  const SearchMovieWidget(
+      {super.key, this.themeData, this.query, this.genres, this.onTap});
   @override
   _SearchMovieWidgetState createState() => _SearchMovieWidgetState();
 }

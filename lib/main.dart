@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      drawer:  Drawer(
+      drawer: Drawer(
         child: WelcomePage(),
       ),
       body: Container(

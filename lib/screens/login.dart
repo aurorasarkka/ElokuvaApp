@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../login_components.dart/my_button.dart';
 import '../login_components.dart/my_textfield.dart';
+import 'package:movie_thing/screens/forgotPassword.dart';
+import 'package:movie_thing/main.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -11,11 +13,9 @@ class LoginPage extends StatelessWidget {
   // text editing controllers
   final passwordController = TextEditingController();
 
-  double _sigmaX = 5; // from 0-10
-  double _sigmaY = 5; // from 0-10
-  double _opacity = 0.2;
-  double _width = 350;
-  double _height = 300;
+  final double _sigmaX = 5; // from 0-10
+  final double _sigmaY = 5; // from 0-10
+  final double _opacity = 0.2;
   final _formKey = GlobalKey<FormState>();
 
   // sign user in method
@@ -32,28 +32,20 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             alignment: Alignment.center,
             children: [
               Image.network(
-                'https://anmg-production.anmg.xyz/yaza-co-za_sfja9J2vLAtVaGdUPdH5y7gA',
+                'https://images.unsplash.com/photo-1629197521865-4946b4acd2b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF2eSUyMGJsdWV8ZW58MHx8MHx8&w=1000&q=80',
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 fit: BoxFit.cover,
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.07),
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    color: Colors.white,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.26),
                   const Text("Log in",
                       style: TextStyle(
@@ -85,11 +77,6 @@ class LoginPage extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 25.0),
                                   child: Row(children: [
-                                    const CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: NetworkImage(
-                                          'https://anmg-production.anmg.xyz/yaza-co-za_sfja9J2vLAtVaGdUPdH5y7gA'),
-                                    ),
                                     SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
@@ -99,11 +86,6 @@ class LoginPage extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       // ignore: prefer_const_literals_to_create_immutables
                                       children: [
-                                        Text("Jane Dow",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold)),
                                         const SizedBox(height: 5),
                                         Text("jane.doe@gmail.com",
                                             style: const TextStyle(
@@ -130,17 +112,26 @@ class LoginPage extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
+                                            builder: (context) => MyApp()));
                                   },
                                 ),
                                 const SizedBox(height: 30),
-                                const Text('Forgot Password?',
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 71, 233, 133),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                    textAlign: TextAlign.start),
+                                TextButton(
+                                    child: const Text('Forgot Password?',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 71, 233, 133),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
+                                        textAlign: TextAlign.start),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgotPassword()),
+                                      );
+                                    })
                               ],
                             ),
                           ),

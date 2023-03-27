@@ -12,7 +12,7 @@ class MyButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 71, 233, 133),
+          color: const Color.fromARGB(255, 71, 233, 133),
           borderRadius: BorderRadius.circular(8),
         ),
         child: const Center(
@@ -42,7 +42,7 @@ class MyButtonAgree extends StatelessWidget {
           color: const Color.fromARGB(255, 71, 233, 133),
           borderRadius: BorderRadius.circular(8),
         ),
-        child:  Center(
+        child: Center(
           child: Text(
             text,
             style: const TextStyle(

@@ -27,7 +27,7 @@ class Credits {
     if (cast != null) {
       data['cast'] = cast?.map((v) => v.toJson()).toList();
     }
-    if (this.crew != null) {
+    if (crew != null) {
       data['crew'] = crew?.map((v) => v.toJson()).toList();
     }
     return data;

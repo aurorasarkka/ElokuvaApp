@@ -8,8 +8,6 @@ import '../login_components.dart/my_button.dart';
 import '../login_components.dart/my_textfield.dart';
 import 'login.dart';
 
-
-
 class Signup extends StatelessWidget {
   Signup({super.key});
 
@@ -20,8 +18,6 @@ class Signup extends StatelessWidget {
   final double _sigmaX = 5; // from 0-10
   final double _sigmaY = 5; // from 0-10
   final double _opacity = 0.2;
-  final double _width = 350;
-  final double _height = 300;
   final _formKey = GlobalKey<FormState>();
 
   // sign user in method
@@ -38,13 +34,13 @@ class Signup extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             alignment: Alignment.center,
             children: [
               Image.network(
-                'https://anmg-production.anmg.xyz/yaza-co-za_sfja9J2vLAtVaGdUPdH5y7gA',
+                'https://images.unsplash.com/photo-1629197521865-4946b4acd2b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF2eSUyMGJsdWV8ZW58MHx8MHx8&w=1000&q=80',
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 fit: BoxFit.cover,
@@ -125,31 +121,9 @@ class Signup extends StatelessWidget {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: [
-                                    RichText(
-                                      text: const TextSpan(
-                                        text: '',
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text:
-                                                'By selecting Agree & Continue below, I agree to our ',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          ),
-                                          TextSpan(
-                                              text:
-                                                  'Terms of Service and Privacy Policy',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 71, 233, 133),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20)),
-                                        ],
-                                      ),
-                                    ),
                                     const SizedBox(height: 10),
                                     MyButtonAgree(
-                                      text: "Agree and Continue",
+                                      text: "Continue",
                                       onTap: () {
                                         Navigator.push(
                                             context,

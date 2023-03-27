@@ -23,7 +23,7 @@ class MovieList {
     data['page'] = page;
     data['total_results'] = totalMovies;
     data['total_pages'] = totalPages;
-    if (this.movies != null) {
+    if (movies != null) {
       data['results'] = movies!.map((v) => v.toJson()).toList();
     }
     return data;
