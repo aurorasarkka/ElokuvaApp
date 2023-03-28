@@ -1,5 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:movie_thing/api/endpoints.dart';
@@ -12,6 +15,7 @@ import 'package:movie_thing/screens/welcome.dart';
 import 'package:movie_thing/screens/widgets.dart';
 import 'package:movie_thing/theme/theme_state.dart';
 import 'package:movie_thing/screens/favorites.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(const MyApp());
 
@@ -43,13 +47,43 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Genres> _genres = [];
+
+  late final http.Client httpClient;
+
+  Movie? _randomMovie;
+  
+  get favorites => null;
+
   @override
   void initState() {
     super.initState();
+    httpClient = http.Client();
     fetchGenres().then((value) {
       _genres = value.genres ?? [];
     });
   }
+
+
+ 
+Future<Movie> fetchRandomMovie() async {
+  final response = await http.get(Uri.parse('https://api.themoviedb.org/3/movie/top_rated?api_key=af7dcb5d262bb63669ebdb759100da85'));
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> responseBody = json.decode(response.body);
+    final List<dynamic> results = responseBody['results'];
+    final random = Random();
+    final randomIndex = random.nextInt(results.length);
+    final Map<String, dynamic> randomResult = results[randomIndex];
+    print('Fetched random movie: ${randomResult['title']}');
+    return Movie.fromJson(randomResult);
+  } else {
+    print('Failed to fetch random movie: ${response.statusCode}');
+    throw Exception('Failed to fetch random movie');
+  }
+}
+  
+
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +111,23 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             color: state.themeData.colorScheme.secondary,
             icon: const Icon(Icons.shuffle),
-            onPressed: () {
+            onPressed: () async {
+               await fetchRandomMovie();
+                if (_randomMovie != null) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Favorites()),
-              );
+                MaterialPageRoute(
+                  builder: (context) => MovieDetailPage(
+                   movie: _randomMovie!,
+                    themeData: state.themeData,
+                    genres: _genres,
+                    heroId: '${_randomMovie!.id}random',
+                  ),
+                  ),
+                );
+              }
             },
           ),
-
           //SUOSIKIT/KÄYTTÄJÄ -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
@@ -92,7 +135,10 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Favorites()),
+                MaterialPageRoute(
+                  builder: (context) =>
+                       Favorites(favorites: favorites),
+                ),
               );
             },
           ),
@@ -155,4 +201,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+  
 }

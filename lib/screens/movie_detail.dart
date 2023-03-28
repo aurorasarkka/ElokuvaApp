@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, library_private_types_in_public_api
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:movie_thing/api/endpoints.dart';
 import 'package:movie_thing/constats/api_constats.dart';
@@ -12,9 +14,11 @@ import 'package:movie_thing/screens/widgets.dart';
 
 class MovieDetailPage extends StatefulWidget {
   final Movie movie;
+  
   final ThemeData themeData;
   final String heroId;
   final List<Genres> genres;
+ 
 
   const MovieDetailPage(
       {super.key,
@@ -28,10 +32,18 @@ class MovieDetailPage extends StatefulWidget {
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
   bool isFavorite = false;
+   List<Movie> favorite = [];
 
   void toggleFavorite() {
     setState(() {
       isFavorite = !isFavorite;
+      if(isFavorite){
+        log(9);
+        favorite.add(widget.movie);
+        log(10);
+      } else{
+        favorite.remove(widget.movie);
+      }
     });
   }
 
@@ -159,13 +171,14 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               ),
                                               IconButton(
                                                 icon: Icon(
-                                                  isFavorite
+                                                  isFavorite //sydän ikoni
                                                       ? Icons.favorite
                                                       : Icons.favorite_border,
                                                   color: favoriteColor,
                                                 ),
                                                 onPressed: () {
                                                   toggleFavorite();
+                                                     log(11);
                                                 },
                                               ),
                                             ],
