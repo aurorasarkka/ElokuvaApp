@@ -2,42 +2,31 @@
 
 import 'package:flutter/material.dart';
 
+import '../models/movie.dart';
+
+
 class Favorites extends StatelessWidget {
-  const Favorites({super.key});
+  final List<Movie> favorites;
+
+  const Favorites({Key? key, List<Movie>? favorites})
+  : favorites = favorites ?? const [],
+   super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.network(
-                'https://images.unsplash.com/photo-1629197521865-4946b4acd2b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF2eSUyMGJsdWV8ZW58MHx8MHx8&w=1000&q=80',
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                fit: BoxFit.cover,
-              ),
-              IconButton(
-                padding: const EdgeInsets.only(right: 850, bottom: 650),
-                icon: const Icon(Icons.arrow_back_ios),
-                color: Colors.white,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.26),
-              const Text("Coming soon...",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold)),
-            ],
-          ),
-        ),
+      appBar: AppBar(
+        title: const Text('Favorite Movies'),
+      ),
+      body: ListView.builder(
+        itemCount: favorites.length,
+        itemBuilder: (context, index) {
+          String title = favorites[index].title ??
+              "No Title"; 
+          return ListTile(
+            title: Text(title),
+          );
+        },
       ),
     );
   }
