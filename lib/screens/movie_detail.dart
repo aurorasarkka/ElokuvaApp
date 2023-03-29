@@ -14,12 +14,10 @@ import 'package:movie_thing/screens/widgets.dart';
 
 class MovieDetailPage extends StatefulWidget {
   final Movie movie;
-  
   final ThemeData themeData;
   final String heroId;
   final List<Genres> genres;
  
-
   const MovieDetailPage(
       {super.key,
       required this.movie,
@@ -30,6 +28,7 @@ class MovieDetailPage extends StatefulWidget {
   _MovieDetailPageState createState() => _MovieDetailPageState();
 }
 
+
 class _MovieDetailPageState extends State<MovieDetailPage> {
   bool isFavorite = false;
    List<Movie> favorite = [];
@@ -38,14 +37,16 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     setState(() {
       isFavorite = !isFavorite;
       if(isFavorite){
-        log(9);
+       print('Added to favorites: ${widget.movie.title}');
         favorite.add(widget.movie);
-        log(10);
       } else{
+         print('Removed from favorites: ${widget.movie.title}');
         favorite.remove(widget.movie);
       }
     });
   }
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +179,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                                 ),
                                                 onPressed: () {
                                                   toggleFavorite();
-                                                     log(11);
+                                                     
                                                 },
                                               ),
                                             ],
