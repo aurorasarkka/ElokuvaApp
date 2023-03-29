@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:movie_thing/api/endpoints.dart';
@@ -63,8 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
- 
 Future<Movie> fetchRandomMovie() async {
   final response = await http.get(Uri.parse('https://api.themoviedb.org/3/movie/top_rated?api_key=af7dcb5d262bb63669ebdb759100da85'));
   if (response.statusCode == 200) {
@@ -80,11 +77,6 @@ Future<Movie> fetchRandomMovie() async {
     throw Exception('Failed to fetch random movie');
   }
 }
-  
-
-  
-
-
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<ThemeState>(context);
@@ -107,6 +99,7 @@ Future<Movie> fetchRandomMovie() async {
         ),
         backgroundColor: state.themeData.primaryColor,
         actions: <Widget>[
+          
           //RANDOM ELOKUVA -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
@@ -132,8 +125,7 @@ Future<Movie> fetchRandomMovie() async {
         
   } },
           ),
-    
-
+  
           //SUOSIKIT -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
@@ -148,6 +140,7 @@ Future<Movie> fetchRandomMovie() async {
               );
             },
           ),
+          
           //HAKU -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
@@ -206,5 +199,4 @@ Future<Movie> fetchRandomMovie() async {
       ),
     );
   }
-  
 }
