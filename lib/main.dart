@@ -112,23 +112,29 @@ Future<Movie> fetchRandomMovie() async {
             color: state.themeData.colorScheme.secondary,
             icon: const Icon(Icons.shuffle),
             onPressed: () async {
-               await fetchRandomMovie();
-                if (_randomMovie != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MovieDetailPage(
-                   movie: _randomMovie!,
-                    themeData: state.themeData,
-                    genres: _genres,
-                    heroId: '${_randomMovie!.id}random',
-                  ),
-                  ),
-                );
-              }
-            },
+         try {
+         final randomMovie = await fetchRandomMovie();
+         Navigator.push(
+         context,
+         MaterialPageRoute(
+         builder: (context) => MovieDetailPage(
+          movie: randomMovie,
+          themeData: state.themeData,
+          genres: _genres,
+          heroId: '${randomMovie.id}random',
+        ),
+      ),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Failed to fetch random movie')),
+    );
+        
+  } },
           ),
-          //SUOSIKIT/KÄYTTÄJÄ -PAINIKE
+    
+
+          //SUOSIKIT -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
             icon: const Icon(Icons.account_circle),
@@ -142,7 +148,6 @@ Future<Movie> fetchRandomMovie() async {
               );
             },
           ),
-
           //HAKU -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
@@ -163,7 +168,7 @@ Future<Movie> fetchRandomMovie() async {
                             heroId: '${result.id}search')));
               }
             },
-          )
+          ),
         ],
       ),
       drawer: Drawer(
