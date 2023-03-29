@@ -85,7 +85,7 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
                                   moviesList![index].posterPath!),
                               fit: BoxFit.cover,
                               placeholder:
-                                  const AssetImage('assets/images/loading.gif'),
+                                  const AssetImage('assets\loading.gif'),
                             ),
                           ),
                         ),
@@ -180,8 +180,8 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
                                           'w500/' +
                                           moviesList![index].posterPath!),
                                       fit: BoxFit.cover,
-                                      placeholder: AssetImage(
-                                          'assets/images/loading.gif'),
+                                      placeholder:
+                                          AssetImage('assets\loading.gif'),
                                     ),
                                   ),
                                 ),
@@ -322,7 +322,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                         moviesList![index].posterPath!),
                                     fit: BoxFit.cover,
                                     placeholder:
-                                        AssetImage('assets/images/loading.gif'),
+                                        AssetImage('assets\loading.gif'),
                                   ),
                                 ),
                               ),
@@ -433,7 +433,7 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                                     child: credits!.cast![index].profilePath ==
                                             null
                                         ? Image.asset(
-                                            'assets/images/na.jpg',
+                                            'assets\black.jpg',
                                             fit: BoxFit.cover,
                                           )
                                         : FadeInImage(
@@ -444,7 +444,7 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                                                         .profilePath!),
                                             fit: BoxFit.cover,
                                             placeholder: AssetImage(
-                                                'assets/images/loading.gif'),
+                                                'assets\loading.gif'),
                                           ),
                                   ),
                                 ),
@@ -612,7 +612,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: moviesList![index].posterPath == null
                                         ? Image.asset(
-                                            'assets/images/na.jpg',
+                                            'assets\black.jpg',
                                             fit: BoxFit.cover,
                                           )
                                         : FadeInImage(
@@ -623,7 +623,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                                         .posterPath!),
                                             fit: BoxFit.cover,
                                             placeholder: AssetImage(
-                                                'assets/images/loading.gif'),
+                                                'assets\loading.gif'),
                                           ),
                                   ),
                                 ),
