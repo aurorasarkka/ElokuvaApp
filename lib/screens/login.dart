@@ -62,8 +62,20 @@ class _LoginPageState extends State<LoginPage> {
           );
         }
       } on FirebaseAuthException catch (e) {
-        // If there is an error with the sign in, print the error message.
-        print('Error: ${e.message}');
+        // If there is an error with the sign in, show an error message.
+        if (e.code == 'wrong-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Incorrect password.'),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Sign in failed. Please try again later.'),
+            ),
+          );
+        }
       }
     }
   }
