@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'utils.dart';
@@ -13,7 +15,8 @@ class ThemeState extends ChangeNotifier {
     _themeData = val;
     notifyListeners();
   }
-ThemeStateEnum _getOption() {
+
+  ThemeStateEnum _getOption() {
     int option = _sharedPreferences?.get('theme_option') as int? ?? 1;
     return ThemeStateEnum.values[option];
   }

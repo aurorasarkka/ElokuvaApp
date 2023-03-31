@@ -1,7 +1,4 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings, library_private_types_in_public_api
-
-import 'dart:math';
-
+// ignore_for_file: prefer_interpolation_to_compose_strings, library_private_types_in_public_api, prefer_const_constructors, avoid_print
 import 'package:flutter/material.dart';
 import 'package:movie_thing/api/endpoints.dart';
 import 'package:movie_thing/constats/api_constats.dart';
