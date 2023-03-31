@@ -32,6 +32,10 @@ class Genres {
     name = json['name'];
   }
 
+  get movie => null;
+
+  
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;

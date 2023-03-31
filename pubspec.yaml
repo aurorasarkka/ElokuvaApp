@@ -39,8 +39,8 @@ dependencies:
   http: ^0.13.5
   carousel_slider: ^4.2.1
   shared_preferences: ^2.0.20
-  firebase_auth: ^4.3.0
-  firebase_core: ^2.8.0
+  firebase_auth: ^4.4.0
+  firebase_core: ^2.9.0
   flutterfire_ui: ^0.4.3+20
   firebase_ui_auth: ^1.1.17
 

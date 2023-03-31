@@ -27,20 +27,31 @@ class MovieDetailPage extends StatefulWidget {
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
   bool isFavorite = false;
-  List<Movie> favorite = [];
+  List<Movie> favoriteMovies = [];
 
-  void toggleFavorite() {
-    setState(() {
-      isFavorite = !isFavorite;
-      if (isFavorite) {
-        print('Added to favorites: ${widget.movie.title}');
-        favorite.add(widget.movie);
-      } else {
-        print('Removed from favorites: ${widget.movie.title}');
-        favorite.remove(widget.movie);
-      }
-    });
-  }
+ void toggleFavorite() {
+  setState(() {
+    if (favoriteMovies.contains(widget.movie)) {
+      favoriteMovies.remove(widget.movie);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Removed from favorites: ${widget.movie.title}'),
+          duration: Duration(seconds: 5),
+        ),
+      );
+      print('Removed from favorites: ${widget.movie.title}');
+    } else {
+      favoriteMovies.add(widget.movie);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Added to favorites: ${widget.movie.title}'),
+          duration: Duration(seconds: 5),
+        ),
+      );
+      print('Added to favorites: ${widget.movie.title}');
+    }
+  });
+}
 
   @override
   Widget build(BuildContext context) {

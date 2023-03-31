@@ -79,6 +79,8 @@ class Movie {
     releaseDate = json['release_date'];
   }
 
+  
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['vote_count'] = voteCount;
