@@ -15,8 +15,15 @@ import 'package:movie_thing/screens/widgets.dart';
 import 'package:movie_thing/theme/theme_state.dart';
 import 'package:movie_thing/screens/favorites.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async => {
+      runApp(const MyApp()),
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      )
+    };
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -50,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late final http.Client httpClient;
 
   Movie? _randomMovie;
-  
+
   get favorites => null;
 
   @override
@@ -62,21 +69,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-Future<Movie> fetchRandomMovie() async {
-  final response = await http.get(Uri.parse('https://api.themoviedb.org/3/movie/top_rated?api_key=af7dcb5d262bb63669ebdb759100da85'));
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> responseBody = json.decode(response.body);
-    final List<dynamic> results = responseBody['results'];
-    final random = Random();
-    final randomIndex = random.nextInt(results.length);
-    final Map<String, dynamic> randomResult = results[randomIndex];
-    print('Fetched random movie: ${randomResult['title']}');
-    return Movie.fromJson(randomResult);
-  } else {
-    print('Failed to fetch random movie: ${response.statusCode}');
-    throw Exception('Failed to fetch random movie');
+  Future<Movie> fetchRandomMovie() async {
+    final response = await http.get(Uri.parse(
+        'https://api.themoviedb.org/3/movie/top_rated?api_key=af7dcb5d262bb63669ebdb759100da85'));
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseBody = json.decode(response.body);
+      final List<dynamic> results = responseBody['results'];
+      final random = Random();
+      final randomIndex = random.nextInt(results.length);
+      final Map<String, dynamic> randomResult = results[randomIndex];
+      print('Fetched random movie: ${randomResult['title']}');
+      return Movie.fromJson(randomResult);
+    } else {
+      print('Failed to fetch random movie: ${response.statusCode}');
+      throw Exception('Failed to fetch random movie');
+    }
   }
-}
+
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<ThemeState>(context);
@@ -99,33 +108,32 @@ Future<Movie> fetchRandomMovie() async {
         ),
         backgroundColor: state.themeData.primaryColor,
         actions: <Widget>[
-          
           //RANDOM ELOKUVA -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
             icon: const Icon(Icons.shuffle),
             onPressed: () async {
-         try {
-         final randomMovie = await fetchRandomMovie();
-         Navigator.push(
-         context,
-         MaterialPageRoute(
-         builder: (context) => MovieDetailPage(
-          movie: randomMovie,
-          themeData: state.themeData,
-          genres: _genres,
-          heroId: '${randomMovie.id}random',
-        ),
-      ),
-    );
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Failed to fetch random movie')),
-    );
-        
-  } },
+              try {
+                final randomMovie = await fetchRandomMovie();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MovieDetailPage(
+                      movie: randomMovie,
+                      themeData: state.themeData,
+                      genres: _genres,
+                      heroId: '${randomMovie.id}random',
+                    ),
+                  ),
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Failed to fetch random movie')),
+                );
+              }
+            },
           ),
-  
+
           //SUOSIKIT -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,
@@ -134,13 +142,12 @@ Future<Movie> fetchRandomMovie() async {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                       Favorites(favorites: favorites),
+                  builder: (context) => Favorites(favorites: favorites),
                 ),
               );
             },
           ),
-          
+
           //HAKU -PAINIKE
           IconButton(
             color: state.themeData.colorScheme.secondary,

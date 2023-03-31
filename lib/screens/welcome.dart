@@ -77,7 +77,7 @@ class WelcomePage extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // username textfield
+                                  // käyttäjänimi
                                   MyTextField(
                                     controller: usernameController,
                                     hintText: 'Email',
@@ -88,7 +88,7 @@ class WelcomePage extends StatelessWidget {
                                       height:
                                           30), //muokkaa continue korkeutta welcomeen verrattuna
 
-                                  // sign in button
+                                  // Kirjautuminen
                                   MyButton(
                                     onTap: (() {
                                       if (_formKey.currentState!.validate()) {
@@ -105,7 +105,7 @@ class WelcomePage extends StatelessWidget {
 
                                   const SizedBox(height: 10),
 
-                                  // or continue with
+                                  // vaihtoehtoiset kirjautumiset
                                   Row(
                                     children: [
                                       Expanded(
@@ -135,7 +135,6 @@ class WelcomePage extends StatelessWidget {
 
                                   const SizedBox(height: 2),
 
-                                  // google + apple sign in buttons?
                                   Padding(
                                     padding: const EdgeInsets.all(1.0),
                                     child: Column(
@@ -143,7 +142,7 @@ class WelcomePage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        // facebook button
+                                        // facebook kirjautuminen
                                         TextButton(
                                           child: Text('Log in with Facebook',
                                               style: TextStyle(
@@ -165,7 +164,7 @@ class WelcomePage extends StatelessWidget {
                                     ),
                                   ),
 
-                                  // not a member? register now
+                                  // ei tiliä? -> tilin luominen
                                   Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: Column(
@@ -178,7 +177,6 @@ class WelcomePage extends StatelessWidget {
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
-                                          // ignore: prefer_const_literals_to_create_immutables
                                           children: [
                                             Text(
                                               'Don\'t have an account?',

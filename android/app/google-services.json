@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "847048933955",
+    "project_id": "movielist-f7b33",
+    "storage_bucket": "movielist-f7b33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847048933955:android:c00af7c13089afee904af6",
+        "android_client_info": {
+          "package_name": "com.example.movie_thing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847048933955-k9kl9m77765offvp2sgemobtiqt65qhd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyj5vQvLuMlLgmD5SNniDYGGA19OHWrvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847048933955-k9kl9m77765offvp2sgemobtiqt65qhd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "847048933955-uje24d7ansrverqcchp08vf9drv7qnn8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.movieThing"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

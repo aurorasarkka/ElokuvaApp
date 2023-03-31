@@ -17,7 +17,7 @@ class MovieDetailPage extends StatefulWidget {
   final ThemeData themeData;
   final String heroId;
   final List<Genres> genres;
- 
+
   const MovieDetailPage(
       {super.key,
       required this.movie,
@@ -28,25 +28,22 @@ class MovieDetailPage extends StatefulWidget {
   _MovieDetailPageState createState() => _MovieDetailPageState();
 }
 
-
 class _MovieDetailPageState extends State<MovieDetailPage> {
   bool isFavorite = false;
-   List<Movie> favorite = [];
+  List<Movie> favorite = [];
 
   void toggleFavorite() {
     setState(() {
       isFavorite = !isFavorite;
-      if(isFavorite){
-       print('Added to favorites: ${widget.movie.title}');
+      if (isFavorite) {
+        print('Added to favorites: ${widget.movie.title}');
         favorite.add(widget.movie);
-      } else{
-         print('Removed from favorites: ${widget.movie.title}');
+      } else {
+        print('Removed from favorites: ${widget.movie.title}');
         favorite.remove(widget.movie);
       }
     });
   }
-  
-  
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +59,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                   children: <Widget>[
                     widget.movie.backdropPath == null
                         ? Image.asset(
-                            'assets/images/na.jpg',
+                            'lib/assets/images/black.jpg',
                             fit: BoxFit.cover,
                           )
                         : FadeInImage(
@@ -73,7 +70,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 widget.movie.backdropPath!),
                             fit: BoxFit.cover,
                             placeholder:
-                                const AssetImage('assets/images/loading.gif'),
+                                AssetImage('lib/assets/images/loading.gif'),
                           ),
                     Container(
                       decoration: BoxDecoration(
@@ -179,7 +176,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                                 ),
                                                 onPressed: () {
                                                   toggleFavorite();
-                                                     
                                                 },
                                               ),
                                             ],
@@ -267,7 +263,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                               borderRadius: BorderRadius.circular(8.0),
                               child: widget.movie.posterPath == null
                                   ? Image.asset(
-                                      'assets/images/na.jpg',
+                                      'lib/assets/images/black.jpg',
                                       fit: BoxFit.cover,
                                     )
                                   : FadeInImage(
@@ -275,8 +271,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                           'w500/' +
                                           widget.movie.posterPath!),
                                       fit: BoxFit.cover,
-                                      placeholder: const AssetImage(
-                                          'assets/images/loading.gif'),
+                                      placeholder: AssetImage(
+                                          'lib/assets/images/loading.gif'),
                                     ),
                             ),
                           ),
@@ -355,11 +351,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: (cast.profilePath == null
-                                    ? const AssetImage('assets/images/na.jpg')
-                                    : NetworkImage(TMDB_BASE_IMAGE_URL +
-                                        'w500/' +
-                                        cast.profilePath!)) as ImageProvider<
-                                    Object>),
+                                        ? const AssetImage(
+                                            'lib/assets/images/black.jpg')
+                                        : NetworkImage(TMDB_BASE_IMAGE_URL +
+                                            'w500/' +
+                                            cast.profilePath!))
+                                    as ImageProvider<Object>),
                             shape: BoxShape.circle),
                       ),
                     ))
