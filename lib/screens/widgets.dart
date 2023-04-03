@@ -62,31 +62,29 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
                   ),
                   itemBuilder:
                       (BuildContext context, int index, pageViewIndex) {
-                    return Container(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MovieDetailPage(
-                                      movie: moviesList![index],
-                                      themeData: widget.themeData,
-                                      genres: widget.genres,
-                                      heroId:
-                                          '${moviesList![index].id}discover')));
-                        },
-                        child: Hero(
-                          tag: '${moviesList![index].id}discover',
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: FadeInImage(
-                              image: NetworkImage(TMDB_BASE_IMAGE_URL +
-                                  'w500/' +
-                                  moviesList![index].posterPath!),
-                              fit: BoxFit.cover,
-                              placeholder:
-                                  AssetImage('lib/assets/images/loading.gif'),
-                            ),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MovieDetailPage(
+                                    movie: moviesList![index],
+                                    themeData: widget.themeData,
+                                    genres: widget.genres,
+                                    heroId:
+                                        '${moviesList![index].id}discover')));
+                      },
+                      child: Hero(
+                        tag: '${moviesList![index].id}discover',
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: FadeInImage(
+                            image: NetworkImage(TMDB_BASE_IMAGE_URL +
+                                'w500/' +
+                                moviesList![index].posterPath!),
+                            fit: BoxFit.cover,
+                            placeholder:
+                                AssetImage('lib/assets/images/loading.gif'),
                           ),
                         ),
                       ),
@@ -491,14 +489,14 @@ class _GenreListState extends State<GenreList> {
     super.initState();
     _genres = [];
     Future.delayed(Duration.zero, () {
-      widget.totalGenres.forEach((valueGenre) {
-        widget.genres.forEach((genre) {
+      for (var valueGenre in widget.totalGenres) {
+        for (var genre in widget.genres) {
           if (valueGenre.id == genre) {
             _genres?.add(valueGenre);
             setState(() {});
           }
-        });
-      });
+        }
+      }
     });
   }
 

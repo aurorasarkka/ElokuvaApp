@@ -53,12 +53,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Genres> _genres = [];
+  List<Movie> favorites = []; // initialize favorites as an empty list
 
   late final http.Client httpClient;
 
   Movie? _randomMovie;
-
-  get favorites => null;
 
   @override
   void initState() {

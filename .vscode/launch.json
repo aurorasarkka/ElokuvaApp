@@ -1,0 +1,108 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "$R02K87F",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$R02K87F",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "$R02K87F (profile mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$R02K87F",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "$R02K87F (release mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$R02K87F",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "$RETPGSW",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RETPGSW",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "$RETPGSW (profile mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RETPGSW",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "$RETPGSW (release mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RETPGSW",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter-Movies-Application",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$R6ODLPE\\Flutter-Movies-Application",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Flutter-Movies-Application (profile mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$R6ODLPE\\Flutter-Movies-Application",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Flutter-Movies-Application (release mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$R6ODLPE\\Flutter-Movies-Application",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "dribbble_ui_design_auth",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RG3S9NS\\dribbble_ui_design_auth",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "dribbble_ui_design_auth (profile mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RG3S9NS\\dribbble_ui_design_auth",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "dribbble_ui_design_auth (release mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RG3S9NS\\dribbble_ui_design_auth",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Matinee-Flutter",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RXKEXRV\\Matinee-Flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Matinee-Flutter (profile mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RXKEXRV\\Matinee-Flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Matinee-Flutter (release mode)",
+            "cwd": "$Recycle.Bin\\S-1-5-21-366407648-1163160049-2104861481-1001\\$RXKEXRV\\Matinee-Flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

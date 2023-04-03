@@ -29,29 +29,33 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   bool isFavorite = false;
   List<Movie> favoriteMovies = [];
 
- void toggleFavorite() {
-  setState(() {
-    if (favoriteMovies.contains(widget.movie)) {
-      favoriteMovies.remove(widget.movie);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Removed from favorites: ${widget.movie.title}'),
-          duration: Duration(seconds: 5),
-        ),
-      );
-      print('Removed from favorites: ${widget.movie.title}');
-    } else {
-      favoriteMovies.add(widget.movie);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Added to favorites: ${widget.movie.title}'),
-          duration: Duration(seconds: 5),
-        ),
-      );
-      print('Added to favorites: ${widget.movie.title}');
-    }
-  });
-}
+  void toggleFavorite() {
+    setState(() {
+      if (favoriteMovies.contains(widget.movie)) {
+        favoriteMovies.remove(widget.movie);
+        isFavorite =
+            false; // set isFavorite to false when movie is removed from favorites
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Removed from favorites: ${widget.movie.title}'),
+            duration: Duration(seconds: 5),
+          ),
+        );
+        print('Removed from favorites: ${widget.movie.title}');
+      } else {
+        favoriteMovies.add(widget.movie);
+        isFavorite =
+            true; // set isFavorite to true when movie is added to favorites
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Added to favorites: ${widget.movie.title}'),
+            duration: Duration(seconds: 5),
+          ),
+        );
+        print('Added to favorites: ${widget.movie.title}');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +181,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               ),
                                               IconButton(
                                                 icon: Icon(
-                                                  isFavorite //sydän ikoni
+                                                  isFavorite
                                                       ? Icons.favorite
                                                       : Icons.favorite_border,
                                                   color: favoriteColor,
@@ -185,7 +189,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                                 onPressed: () {
                                                   toggleFavorite();
                                                 },
-                                              ),
+                                              )
                                             ],
                                           ),
                                         )

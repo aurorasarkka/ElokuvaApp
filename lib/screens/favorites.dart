@@ -6,9 +6,7 @@ import '../models/movie.dart';
 class Favorites extends StatelessWidget {
   final List<Movie> favorites;
 
-  const Favorites({Key? key, List<Movie>? favorites})
-      : favorites = favorites ?? const [],
-        super(key: key);
+  const Favorites({Key? key, required this.favorites}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,7 @@ class Favorites extends StatelessWidget {
       body: ListView.builder(
         itemCount: favorites.length,
         itemBuilder: (context, index) {
-          String title = favorites[index].title ?? "No Title";
+          String title = favorites[index].title ?? 'No Title';
           return ListTile(
             title: Text(title),
           );
