@@ -5,6 +5,7 @@ import 'package:movie_thing/constats/api_constats.dart';
 import 'package:movie_thing/models/credits.dart';
 import 'package:movie_thing/models/genres.dart';
 import 'package:movie_thing/models/movie.dart';
+import 'package:movie_thing/models/movieManager.dart';
 import 'package:movie_thing/screens/widgets.dart';
 
 //SIVU MISSÄ NÄKEE LEFFAN TIEDOT KUN KUVAKETTA KLIKATTU
@@ -32,27 +33,27 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   void toggleFavorite() {
     setState(() {
       if (favoriteMovies.contains(widget.movie)) {
+        final movieManager = MovieManager(favoriteMovies);
+        movieManager.remove(widget.movie);
         favoriteMovies.remove(widget.movie);
-        isFavorite =
-            false; // set isFavorite to false when movie is removed from favorites
+        isFavorite = false;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Removed from favorites: ${widget.movie.title}'),
             duration: Duration(seconds: 5),
           ),
         );
-        print('Removed from favorites: ${widget.movie.title}');
       } else {
+        final movieManager = MovieManager(favoriteMovies);
+        movieManager.add(widget.movie);
         favoriteMovies.add(widget.movie);
-        isFavorite =
-            true; // set isFavorite to true when movie is added to favorites
+        isFavorite = true;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Added to favorites: ${widget.movie.title}'),
             duration: Duration(seconds: 5),
           ),
         );
-        print('Added to favorites: ${widget.movie.title}');
       }
     });
   }
@@ -160,7 +161,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          widget.movie.title!,
+                                          widget.movie.title,
                                           style: widget.themeData.textTheme
                                               .headlineSmall,
                                           maxLines: 2,

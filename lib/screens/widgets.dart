@@ -186,7 +186,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    moviesList![index].title!,
+                                    moviesList![index].title,
                                     style: widget.themeData.textTheme.bodyLarge,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -278,7 +278,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      moviesList![index].title!,
+                                      moviesList![index].title,
                                       style:
                                           widget.themeData.textTheme.bodyMedium,
                                       overflow: TextOverflow.ellipsis,
@@ -635,7 +635,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                           MainAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          moviesList![index].title!,
+                                          moviesList![index].title,
                                           style: widget
                                               .themeData!.textTheme.bodyMedium,
                                           overflow: TextOverflow.ellipsis,

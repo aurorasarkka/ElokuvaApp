@@ -17,6 +17,9 @@ import 'package:movie_thing/screens/favorites.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'models/movieManager.dart';
+
+List<Movie> favorites = [];
 
 Future<void> main() async => {
       runApp(const MyApp()),
@@ -26,25 +29,36 @@ Future<void> main() async => {
     };
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ThemeState>(
-      create: (_) => ThemeState(),
+    final List<Movie> favorites = [];
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeState()),
+        ChangeNotifierProvider(create: (_) => MovieManager(favorites)),
+      ],
       child: MaterialApp(
         title: 'Movie List',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primarySwatch: Colors.green, canvasColor: Colors.transparent),
-        home: const MyHomePage(),
+          primarySwatch: Colors.green,
+          canvasColor: Colors.transparent,
+        ),
+        home: MyHomePage(favorites: favorites),
       ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  final List<Movie> favorites;
+
+  const MyHomePage({Key? key, required this.favorites}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -53,7 +67,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Genres> _genres = [];
-  List<Movie> favorites = []; // initialize favorites as an empty list
 
   late final http.Client httpClient;
 
@@ -141,7 +154,9 @@ class _MyHomePageState extends State<MyHomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Favorites(favorites: favorites),
+                  builder: (context) => FavoritesPage(
+                    favorites: favorites,
+                  ),
                 ),
               );
             },

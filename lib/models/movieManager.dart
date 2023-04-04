@@ -6,14 +6,16 @@ import 'movie.dart';
 class MovieManager extends ChangeNotifier {
   final List<Movie> _favorites = [];
 
+  MovieManager(List<Movie> favorites);
+
   List<Movie> get favorites => _favorites;
 
-  void addMovieToFavorites(Movie movie) {
+  void add(Movie movie) {
     _favorites.add(movie);
     notifyListeners();
   }
 
-  void removeMovieFromFavorites(Movie movie) {
+  void remove(Movie movie) {
     _favorites.remove(movie);
     notifyListeners();
   }
@@ -21,7 +23,7 @@ class MovieManager extends ChangeNotifier {
   bool isMovieFavorite(Movie movie) {
     return _favorites.contains(movie);
   }
-  
+
   void saveMoviesToFavoriteList(List<Movie> movies) {
     _favorites.addAll(movies);
     notifyListeners();

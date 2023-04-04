@@ -35,7 +35,7 @@ class Movie {
   int? id;
   bool? video;
   String? voteAverage;
-  String? title;
+  late String title;
   double? popularity;
   String? posterPath;
   String? originalLanguage;
@@ -44,14 +44,14 @@ class Movie {
   String? backdropPath;
   bool? adult;
   String? overview;
-  String? releaseDate;
+  late String releaseDate;
 
   Movie(
       {this.voteCount,
       this.id,
       this.video,
       this.voteAverage,
-      this.title,
+      this.title = '',
       this.popularity,
       this.posterPath,
       this.originalLanguage,
@@ -60,7 +60,7 @@ class Movie {
       this.backdropPath,
       this.adult,
       this.overview,
-      this.releaseDate});
+      this.releaseDate = ''});
 
   Movie.fromJson(Map<String, dynamic> json) {
     voteCount = json['vote_count'];
@@ -78,8 +78,6 @@ class Movie {
     overview = json['overview'];
     releaseDate = json['release_date'];
   }
-
-  
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
