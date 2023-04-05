@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_local_variable
+// ignore_for_file: file_names, unused_local_variable, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,13 +9,16 @@ import '../models/movieManager.dart';
 class FavoritesPage extends StatelessWidget {
   final List<Movie> favorites;
 
-  const FavoritesPage({super.key, required this.favorites});
+  const FavoritesPage({Key? key, required this.favorites}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<MovieManager>(
       builder: (context, movieManager, child) {
         final List<Movie> favoriteMovies = movieManager.favorites;
+
+        // print the list of favorite movies to the debug console
+        print(favoriteMovies);
 
         return Scaffold(
           backgroundColor: Colors.white,

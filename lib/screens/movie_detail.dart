@@ -2,11 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:movie_thing/api/endpoints.dart';
 import 'package:movie_thing/constats/api_constats.dart';
+import 'package:movie_thing/main.dart';
 import 'package:movie_thing/models/credits.dart';
 import 'package:movie_thing/models/genres.dart';
 import 'package:movie_thing/models/movie.dart';
 import 'package:movie_thing/models/movieManager.dart';
 import 'package:movie_thing/screens/widgets.dart';
+import 'package:provider/provider.dart';
 
 //SIVU MISSÄ NÄKEE LEFFAN TIEDOT KUN KUVAKETTA KLIKATTU
 
@@ -28,278 +30,255 @@ class MovieDetailPage extends StatefulWidget {
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
   bool isFavorite = false;
-  List<Movie> favoriteMovies = [];
-
-  void toggleFavorite() {
-    setState(() {
-      if (favoriteMovies.contains(widget.movie)) {
-        final movieManager = MovieManager(favoriteMovies);
-        movieManager.remove(widget.movie);
-        favoriteMovies.remove(widget.movie);
-        isFavorite = false;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Removed from favorites: ${widget.movie.title}'),
-            duration: Duration(seconds: 5),
-          ),
-        );
-      } else {
-        final movieManager = MovieManager(favoriteMovies);
-        movieManager.add(widget.movie);
-        favoriteMovies.add(widget.movie);
-        isFavorite = true;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Added to favorites: ${widget.movie.title}'),
-            duration: Duration(seconds: 5),
-          ),
-        );
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    Color favoriteColor = isFavorite ? Colors.red : Colors.white;
-
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Expanded(
-                child: Stack(
-                  children: <Widget>[
-                    widget.movie.backdropPath == null
-                        ? Image.asset(
-                            'lib/assets/images/black.jpg',
-                            fit: BoxFit.cover,
-                          )
-                        : FadeInImage(
-                            width: double.infinity,
-                            height: double.infinity,
-                            image: NetworkImage(TMDB_BASE_IMAGE_URL +
-                                'original/' +
-                                widget.movie.backdropPath!),
-                            fit: BoxFit.cover,
-                            placeholder:
-                                AssetImage('lib/assets/images/loading.gif'),
-                          ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          gradient: LinearGradient(
-                              begin: FractionalOffset.bottomCenter,
-                              end: FractionalOffset.topCenter,
-                              colors: [
-                                widget.themeData.colorScheme.secondary,
-                                widget.themeData.colorScheme.secondary
-                                    .withOpacity(0.3),
-                                widget.themeData.colorScheme.secondary
-                                    .withOpacity(0.2),
-                                widget.themeData.colorScheme.secondary
-                                    .withOpacity(0.1),
-                              ],
-                              stops: const [
-                                0.0,
-                                0.25,
-                                0.5,
-                                0.75
-                              ])),
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  color: widget.themeData.colorScheme.secondary,
-                ),
-              )
-            ],
-          ),
-          Column(
-            children: <Widget>[
-              AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: widget.themeData.colorScheme.secondary,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.transparent,
+    Color favoriteColor =
+        isFavorite ? Color.fromARGB(255, 255, 18, 2) : Colors.white;
+    return Consumer<MovieManager>(builder: (context, movieManager, child) {
+      return Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Expanded(
                   child: Stack(
                     children: <Widget>[
-                      SizedBox(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 75, 16, 16),
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                      widget.movie.backdropPath == null
+                          ? Image.asset(
+                              'lib/assets/images/black.jpg',
+                              fit: BoxFit.cover,
+                            )
+                          : FadeInImage(
+                              width: double.infinity,
+                              height: double.infinity,
+                              image: NetworkImage(TMDB_BASE_IMAGE_URL +
+                                  'original/' +
+                                  widget.movie.backdropPath!),
+                              fit: BoxFit.cover,
+                              placeholder:
+                                  AssetImage('lib/assets/images/loading.gif'),
                             ),
-                            color: widget.themeData.primaryColor,
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 120.0),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          widget.movie.title,
-                                          style: widget.themeData.textTheme
-                                              .headlineSmall,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Text(
-                                                widget.movie.voteAverage!,
-                                                style: widget.themeData
-                                                    .textTheme.bodyLarge,
-                                              ),
-                                              const Icon(
-                                                Icons.star,
-                                                color: Colors.yellow,
-                                              ),
-                                              IconButton(
-                                                icon: Icon(
-                                                  isFavorite
-                                                      ? Icons.favorite
-                                                      : Icons.favorite_border,
-                                                  color: favoriteColor,
-                                                ),
-                                                onPressed: () {
-                                                  toggleFavorite();
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: SingleChildScrollView(
-                                    physics: const BouncingScrollPhysics(),
-                                    child: Column(
-                                      children: <Widget>[
-                                        widget.genres.isEmpty
-                                            ? Container()
-                                            : GenreList(
-                                                themeData: widget.themeData,
-                                                genres:
-                                                    widget.movie.genreIds ?? [],
-                                                totalGenres: widget.genres,
-                                              ),
-                                        Row(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0),
-                                              child: Text(
-                                                'Overview',
-                                                style: widget.themeData
-                                                    .textTheme.bodyLarge,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            widget.movie.overview!,
-                                            style: widget
-                                                .themeData.textTheme.bodySmall,
-                                          ),
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0, bottom: 4.0),
-                                              child: Text(
-                                                'Release date : ${widget.movie.releaseDate}',
-                                                style: widget.themeData
-                                                    .textTheme.bodyLarge,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        ScrollingArtists(
-                                          api: Endpoints.getCreditsUrl(
-                                              widget.movie.id!),
-                                          title: 'Cast',
-                                          tapButtonText: 'See full cast & crew',
-                                          themeData: widget.themeData,
-                                          onTap: (Cast cast) {
-                                            modalBottomSheetMenu(cast);
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: 40,
-                        child: Hero(
-                          tag: widget.heroId,
-                          child: SizedBox(
-                            width: 100,
-                            height: 150,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: widget.movie.posterPath == null
-                                  ? Image.asset(
-                                      'lib/assets/images/black.jpg',
-                                      fit: BoxFit.cover,
-                                    )
-                                  : FadeInImage(
-                                      image: NetworkImage(TMDB_BASE_IMAGE_URL +
-                                          'w500/' +
-                                          widget.movie.posterPath!),
-                                      fit: BoxFit.cover,
-                                      placeholder: AssetImage(
-                                          'lib/assets/images/loading.gif'),
-                                    ),
-                            ),
-                          ),
-                        ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            gradient: LinearGradient(
+                                begin: FractionalOffset.bottomCenter,
+                                end: FractionalOffset.topCenter,
+                                colors: [
+                                  widget.themeData.colorScheme.secondary,
+                                  widget.themeData.colorScheme.secondary
+                                      .withOpacity(0.3),
+                                  widget.themeData.colorScheme.secondary
+                                      .withOpacity(0.2),
+                                  widget.themeData.colorScheme.secondary
+                                      .withOpacity(0.1),
+                                ],
+                                stops: const [
+                                  0.0,
+                                  0.25,
+                                  0.5,
+                                  0.75
+                                ])),
                       )
                     ],
                   ),
                 ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
+                Expanded(
+                  child: Container(
+                    color: widget.themeData.colorScheme.secondary,
+                  ),
+                )
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: widget.themeData.colorScheme.secondary,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Stack(
+                      children: <Widget>[
+                        SizedBox(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 75, 16, 16),
+                            child: Card(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              color: widget.themeData.primaryColor,
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 120.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            widget.movie.title,
+                                            style: widget.themeData.textTheme
+                                                .headlineSmall,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Text(
+                                                  widget.movie.voteAverage!,
+                                                  style: widget.themeData
+                                                      .textTheme.bodyLarge,
+                                                ),
+                                                const Icon(
+                                                  Icons.star,
+                                                  color: Colors.yellow,
+                                                ),
+                                                IconButton(
+                                                  icon: Icon(
+                                                    isFavorite
+                                                        ? Icons.favorite
+                                                        : Icons.favorite_border,
+                                                    color: favoriteColor,
+                                                  ),
+                                                  onPressed: () {
+                                                    movieManager.toggleFavorite(
+                                                        widget.movie, context);
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      physics: const BouncingScrollPhysics(),
+                                      child: Column(
+                                        children: <Widget>[
+                                          widget.genres.isEmpty
+                                              ? Container()
+                                              : GenreList(
+                                                  themeData: widget.themeData,
+                                                  genres:
+                                                      widget.movie.genreIds ??
+                                                          [],
+                                                  totalGenres: widget.genres,
+                                                ),
+                                          Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0),
+                                                child: Text(
+                                                  'Overview',
+                                                  style: widget.themeData
+                                                      .textTheme.bodyLarge,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              widget.movie.overview!,
+                                              style: widget.themeData.textTheme
+                                                  .bodySmall,
+                                            ),
+                                          ),
+                                          Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0, bottom: 4.0),
+                                                child: Text(
+                                                  'Release date : ${widget.movie.releaseDate}',
+                                                  style: widget.themeData
+                                                      .textTheme.bodyLarge,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          ScrollingArtists(
+                                            api: Endpoints.getCreditsUrl(
+                                                widget.movie.id!),
+                                            title: 'Cast',
+                                            tapButtonText:
+                                                'See full cast & crew',
+                                            themeData: widget.themeData,
+                                            onTap: (Cast cast) {
+                                              modalBottomSheetMenu(cast);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 40,
+                          child: Hero(
+                            tag: widget.heroId,
+                            child: SizedBox(
+                              width: 100,
+                              height: 150,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: widget.movie.posterPath == null
+                                    ? Image.asset(
+                                        'lib/assets/images/black.jpg',
+                                        fit: BoxFit.cover,
+                                      )
+                                    : FadeInImage(
+                                        image: NetworkImage(
+                                            TMDB_BASE_IMAGE_URL +
+                                                'w500/' +
+                                                widget.movie.posterPath!),
+                                        fit: BoxFit.cover,
+                                        placeholder: AssetImage(
+                                            'lib/assets/images/loading.gif'),
+                                      ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      );
+    });
   }
 
   void modalBottomSheetMenu(Cast cast) {

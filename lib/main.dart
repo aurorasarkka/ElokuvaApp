@@ -151,6 +151,10 @@ class _MyHomePageState extends State<MyHomePage> {
             color: state.themeData.colorScheme.secondary,
             icon: const Icon(Icons.account_circle),
             onPressed: () {
+              // Retrieve the list of favorite movies from the MovieManager
+              final List<Movie> favorites =
+                  Provider.of<MovieManager>(context, listen: false).favorites;
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
