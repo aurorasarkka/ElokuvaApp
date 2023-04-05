@@ -1,5 +1,4 @@
 // ignore_for_file: file_names, avoid_print
-
 import 'package:flutter/material.dart';
 import 'movie.dart';
 
@@ -13,9 +12,12 @@ class MovieManager extends ChangeNotifier {
 
   // Adds a movie to the list of favorite movies and notifies any listeners that the state has changed
   void add(Movie movie) {
-    _favorites.add(movie);
-    notifyListeners();
-    print('hello');
+    print('adding ${movie.title}');
+    if (!_favorites.contains(movie)) {
+      _favorites.add(movie);
+      print('not.adding ${movie.title}');
+      notifyListeners();
+    }
   }
 
   // Removes a movie from the list of favorite movies and notifies any listeners that the state has changed
@@ -24,9 +26,21 @@ class MovieManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Updates the favorite movie list by adding the new movie and removing the old movie
+  void update(Movie oldMovie, Movie newMovie) {
+    final index = _favorites.indexOf(oldMovie);
+    _favorites[index] = newMovie;
+    notifyListeners();
+  }
+
   // Checks if a movie is a favorite by checking if it is in the _favorites list and returns a boolean value
   bool isMovieFavorite(Movie movie) {
-    return _favorites.contains(movie);
+    for (Movie current in favorites) {
+      if (movie.title == current.title) {
+        return true;
+      }
+    }
+    return false;
   }
 
   // Adds a list of movies to the list of favorite movies and notifies any listeners that the state has changed
@@ -42,8 +56,15 @@ class MovieManager extends ChangeNotifier {
   }
 
   void toggleFavorite(Movie movie, BuildContext context) {
-    if (_favorites.contains(movie)) {
-      remove(movie);
+    Movie? found;
+    for (Movie current in favorites) {
+      if (movie.title == current.title) {
+        found = current;
+        break;
+      }
+    }
+    if (found != null) {
+      remove(found);
       print('Removed from favorites: ${movie.title}');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
