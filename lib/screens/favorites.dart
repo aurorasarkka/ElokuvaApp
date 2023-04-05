@@ -28,9 +28,15 @@ class FavoritesPage extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-              title: const Text('Favorites'),
-              backgroundColor: Colors.grey[800] // set the app bar color here
+              title: const Text(
+                'Favorites',
+                style: TextStyle(
+                  color: Color.fromRGBO(99, 227, 227, 1),// set the text color here
+                ),
               ),
+              backgroundColor: Colors.grey[800] // set the app bar color here
+                ),
+              
           body: Container(
             color: const Color.fromRGBO(
                 36, 34, 73, 120), // set the background color here
