@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import '../models/movie.dart';
 import '../models/movieManager.dart';
 
+
+
 class FavoritesPage extends StatelessWidget {
   final List<Movie> favorites;
   final Map<int, String> genres;
@@ -28,25 +30,25 @@ class FavoritesPage extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-              title: const Text(
-                'Favorites',
-                style: TextStyle(
-                  color: Color.fromRGBO(99, 227, 227, 1),// set the text color here
-                ),
+            title: const Text(
+              'Favorites',
+              style: TextStyle(
+                color: Color.fromRGBO(99, 227, 227, 1),
               ),
-              backgroundColor: Colors.grey[800] // set the app bar color here
-                ),
-              
+            ),
+            backgroundColor: Colors.grey[800],
+            iconTheme: const IconThemeData(
+              color:  Color.fromRGBO(99, 227, 227, 1), // set the back button color here
+            ),
+          ),
           body: Container(
-            color: const Color.fromRGBO(
-                36, 34, 73, 120), // set the background color here
+            color: const Color.fromRGBO(36, 34, 73, 120),
             child: ListView.builder(
               itemCount: favoriteMovies.length,
               itemBuilder: (context, index) {
                 final Movie movie = favoriteMovies[index];
                 return GestureDetector(
                   onTap: () {
-                    // Navigate to the movie details page
                     Navigator.push(
                       context,
                       MaterialPageRoute(
