@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings, library_private_types_in_public_api, prefer_const_constructors, avoid_print
+// ignore_for_file: prefer_interpolation_to_compose_strings, library_private_types_in_public_api, prefer_const_constructors, avoid_print, no_logic_in_create_state
 import 'package:flutter/material.dart';
 import 'package:movie_thing/api/endpoints.dart';
 import 'package:movie_thing/constats/api_constats.dart';
-import 'package:movie_thing/main.dart';
+//import 'package:movie_thing/main.dart';
 import 'package:movie_thing/models/credits.dart';
 import 'package:movie_thing/models/genres.dart';
 import 'package:movie_thing/models/movie.dart';
@@ -25,16 +25,27 @@ class MovieDetailPage extends StatefulWidget {
       required this.heroId,
       required this.genres});
   @override
-  _MovieDetailPageState createState() => _MovieDetailPageState();
+  _MovieDetailPageState createState() => _MovieDetailPageState(movie);
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
+  Movie movie;
   bool isFavorite = false;
+  Color iconColor = Colors.white;
+
+  _MovieDetailPageState(this.movie);
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorite = Provider.of<MovieManager>(context, listen: false)
+        .isMovieFavorite(movie);
+
+    iconColor = isFavorite ? Colors.red : Colors.white;
+  }
 
   @override
   Widget build(BuildContext context) {
-    Color favoriteColor =
-        isFavorite ? Color.fromARGB(255, 255, 18, 2) : Colors.white;
     return Consumer<MovieManager>(builder: (context, movieManager, child) {
       return Scaffold(
         body: Stack(
@@ -159,11 +170,19 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                                     isFavorite
                                                         ? Icons.favorite
                                                         : Icons.favorite_border,
-                                                    color: favoriteColor,
+                                                    color: iconColor,
                                                   ),
                                                   onPressed: () {
+                                                    setState(() {
+                                                      isFavorite = !isFavorite;
+                                                      iconColor = isFavorite
+                                                          ? Colors.red
+                                                          : Colors.white;
+                                                    });
                                                     movieManager.toggleFavorite(
                                                         widget.movie, context);
+
+                                                    //print(isFavorite);
                                                   },
                                                 )
                                               ],
