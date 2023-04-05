@@ -24,6 +24,7 @@ class MovieDetailPage extends StatefulWidget {
       required this.themeData,
       required this.heroId,
       required this.genres});
+
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState(movie);
 }

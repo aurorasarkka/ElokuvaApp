@@ -26,8 +26,12 @@ class Signup extends StatelessWidget {
 
   // function to sign up a user
   void signUpUser(BuildContext context) async {
+    print('Starting sign-up process...');
+
     // validate form
     if (_formKey.currentState!.validate()) {
+      print('Form validation passed, creating user...');
+
       try {
         // create user using Firebase authentication
         UserCredential userCredential =
@@ -35,6 +39,9 @@ class Signup extends StatelessWidget {
           email: usernameController.text,
           password: passwordController.text,
         );
+
+        print(
+            'User created in Firebase authentication, storing data in Firestore...');
 
         // store user email and password in Firestore
         await FirebaseFirestore.instance
@@ -44,6 +51,8 @@ class Signup extends StatelessWidget {
           'email': usernameController.text,
           'password': passwordController.text,
         });
+
+        print('User data stored in Firestore, navigating to login page...');
 
         // navigate to login page after successful sign up
         Navigator.push(
@@ -68,6 +77,8 @@ class Signup extends StatelessWidget {
         // handle any other errors here
         print(e);
       }
+    } else {
+      print('Form validation failed.');
     }
   }
 

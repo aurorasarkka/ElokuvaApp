@@ -17,36 +17,39 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Declare the text editing controllers for the email and password fields.
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  // Declare variables for the blur effect.
+
   final double _sigmaX = 5; // from 0-10
   final double _sigmaY = 5; // from 0-10
   final double _opacity = 0.2;
-  // Create a form key for the login form.
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  // Function to handle signing in the user.
   void signUserIn() async {
     // Validate the form.
     if (_formKey.currentState!.validate()) {
       try {
         final password = passwordController.text.trim();
         final email = emailController.text.trim();
+        print('Email and password entered: $email, $password');
 
         // Check if the email already exists in Firebase.
         final querySnapshot = await FirebaseFirestore.instance
             .collection('users')
             .where('email', isEqualTo: email)
             .get();
+        print(
+            'Query snapshot received: ${querySnapshot.docs.length} documents');
 
         if (querySnapshot.docs.isNotEmpty) {
           // If the account exists, sign in with email and password.
+          print('Account exists, signing in...');
           final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: email,
             password: password,
           );
+          print('Sign in successful, user ID: ${result.user!.uid}');
 
           // If the sign in is successful, navigate to the main app screen.
           Navigator.pushReplacement(
@@ -55,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
           );
         } else {
           // If the account does not exist, show an error message asking the user to sign up.
+          print('Account does not exist');
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('This email is not registered. Please sign up.'),
@@ -64,12 +68,14 @@ class _LoginPageState extends State<LoginPage> {
       } on FirebaseAuthException catch (e) {
         // If there is an error with the sign in, show an error message.
         if (e.code == 'wrong-password') {
+          print('Incorrect password');
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Incorrect password.'),
             ),
           );
         } else {
+          print('Sign in failed: ${e.message}');
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Sign in failed. Please try again later.'),

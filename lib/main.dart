@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         title: 'Movie List',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.green,
+          primaryColor: const Color.fromRGBO(255, 255, 255, 100),
           canvasColor: Colors.transparent,
         ),
         home: MyHomePage(favorites: favorites),
@@ -160,6 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 MaterialPageRoute(
                   builder: (context) => FavoritesPage(
                     favorites: favorites,
+                    genres: const {},
                   ),
                 ),
               );
