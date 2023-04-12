@@ -18,8 +18,10 @@ import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'models/movieManager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 List<Movie> favorites = [];
+final auth = FirebaseAuth.instance;
 
 Future<void> main() async => {
       runApp(const MyApp()),

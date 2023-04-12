@@ -157,6 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                                               email: _emailTextController.text,
                                               password:
                                                   _passwordTextController.text,
+                                              context: context,
                                             );
 
                                             setState(() {
