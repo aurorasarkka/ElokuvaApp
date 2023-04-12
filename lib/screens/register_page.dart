@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, avoid_print
 
 import 'package:flutter/material.dart';
 
@@ -41,45 +41,65 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Color.fromRGBO(99, 227, 227, 300),
+                      ),
+                    ),
+                  ],
+                ),
                 Form(
                   key: _registerFormKey,
                   child: Column(
                     children: <Widget>[
                       const SizedBox(height: 16.0),
                       TextFormField(
-                        controller: _emailTextController,
-                        focusNode: _focusEmail,
-                        validator: (value) => Validator.validateEmail(
-                          email: value,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Email",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: const BorderSide(
-                              color: Colors.white,
+                          style: const TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1)),
+                          controller: _emailTextController,
+                          focusNode: _focusEmail,
+                          validator: (value) => Validator.validateEmail(
+                                email: value,
+                              ),
+                          decoration: InputDecoration(
+                            hintText: "Email",
+                            hintStyle: const TextStyle(color: Colors.white),
+                            errorStyle: const TextStyle(color: Colors.red),
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
+                          )),
                       const SizedBox(height: 16.0),
                       TextFormField(
-                        controller: _passwordTextController,
-                        focusNode: _focusPassword,
-                        obscureText: true,
-                        validator: (value) => Validator.validatePassword(
-                          password: value,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
+                          style: const TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1)),
+                          controller: _passwordTextController,
+                          focusNode: _focusPassword,
+                          obscureText: true,
+                          validator: (value) => Validator.validatePassword(
+                                password: value,
+                              ),
+                          decoration: InputDecoration(
+                            hintText: "Password",
+                            hintStyle: const TextStyle(color: Colors.white),
+                            errorStyle: const TextStyle(color: Colors.red),
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
+                          )),
                       const SizedBox(height: 32.0),
                       _isProcessing
                           ? const CircularProgressIndicator()
@@ -92,8 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         _isProcessing = true;
                                       });
 
-                                      print(
-                                          'Register button pressed'); // Add print statement
+                                      print('Register button pressed');
 
                                       if (_registerFormKey.currentState!
                                           .validate()) {

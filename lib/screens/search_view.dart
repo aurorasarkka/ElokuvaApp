@@ -24,9 +24,9 @@ class MovieSearch extends SearchDelegate<Movie?> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.clear,
-          color: themeData!.colorScheme.secondary,
+          color: Color.fromRGBO(99, 227, 227, 300),
         ),
         onPressed: () {
           query = '';
@@ -38,9 +38,9 @@ class MovieSearch extends SearchDelegate<Movie?> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(
+      icon: const Icon(
         Icons.arrow_back,
-        color: themeData!.colorScheme.secondary,
+        color: Color.fromRGBO(99, 227, 227, 300),
       ),
       onPressed: () {
         close(context, null);
@@ -69,13 +69,13 @@ class MovieSearch extends SearchDelegate<Movie?> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             width: 50,
             height: 50,
             child: Icon(
               Icons.search,
               size: 50,
-              color: themeData!.colorScheme.secondary,
+              color: Color.fromRGBO(99, 227, 227, 300),
             ),
           ),
           Text('Enter a Movie to search.',

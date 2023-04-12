@@ -64,6 +64,20 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Color.fromRGBO(99, 227, 227, 300),
+                          ),
+                        ),
+                      ],
+                    ),
                     const Padding(
                       padding: EdgeInsets.only(bottom: 24.0),
                       child: Text(
@@ -80,39 +94,45 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: <Widget>[
                           TextFormField(
-                            controller: _emailTextController,
-                            focusNode: _focusEmail,
-                            validator: (value) => Validator.validateEmail(
-                              email: value,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: "Email",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
+                              style: const TextStyle(color: Colors.white),
+                              controller: _emailTextController,
+                              focusNode: _focusEmail,
+                              validator: (value) => Validator.validateEmail(
+                                    email: value,
+                                  ),
+                              decoration: InputDecoration(
+                                hintText: "Email",
+                                hintStyle: const TextStyle(color: Colors.white),
+                                errorStyle:
+                                    const TextStyle(color: Colors.white),
+                                errorBorder: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderSide: const BorderSide(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
+                              )),
                           const SizedBox(height: 8.0),
                           TextFormField(
-                            controller: _passwordTextController,
-                            focusNode: _focusPassword,
-                            obscureText: true,
-                            validator: (value) => Validator.validatePassword(
-                              password: value,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
+                              style: const TextStyle(color: Colors.white),
+                              controller: _passwordTextController,
+                              focusNode: _focusPassword,
+                              obscureText: true,
+                              validator: (value) => Validator.validatePassword(
+                                    password: value,
+                                  ),
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                hintStyle: const TextStyle(color: Colors.white),
+                                errorStyle:
+                                    const TextStyle(color: Colors.white),
+                                errorBorder: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderSide: const BorderSide(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
+                              )),
                           const SizedBox(height: 24.0),
                           _isProcessing
                               ? const CircularProgressIndicator()
@@ -154,6 +174,12 @@ class _LoginPageState extends State<LoginPage> {
                                             }
                                           }
                                         },
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  const Color.fromRGBO(
+                                                      99, 227, 227, 300)),
+                                        ),
                                         child: const Text(
                                           'Sign In',
                                           style: TextStyle(color: Colors.white),
@@ -171,6 +197,12 @@ class _LoginPageState extends State<LoginPage> {
                                             ),
                                           );
                                         },
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  const Color.fromRGBO(
+                                                      99, 227, 227, 300)),
+                                        ),
                                         child: const Text(
                                           'Register',
                                           style: TextStyle(color: Colors.white),
@@ -178,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     ),
                                   ],
-                                )
+                                ),
                         ],
                       ),
                     )

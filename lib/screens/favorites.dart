@@ -7,8 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/movie.dart';
 import '../models/movieManager.dart';
 
-
-
 class FavoritesPage extends StatelessWidget {
   final List<Movie> favorites;
   final Map<int, String> genres;
@@ -33,12 +31,13 @@ class FavoritesPage extends StatelessWidget {
             title: const Text(
               'Favorites',
               style: TextStyle(
-                color: Color.fromRGBO(99, 227, 227, 1),
+                color: Color.fromRGBO(99, 227, 227, 300),
               ),
             ),
             backgroundColor: Colors.grey[800],
             iconTheme: const IconThemeData(
-              color:  Color.fromRGBO(99, 227, 227, 1), // set the back button color here
+              color: Color.fromRGBO(
+                  99, 227, 227, 300), // set the back button color here
             ),
           ),
           body: Container(
