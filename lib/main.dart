@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:movie_thing/screens/login_page.dart';
 import 'package:provider/provider.dart';
 import 'package:movie_thing/api/endpoints.dart';
 import 'package:movie_thing/models/genres.dart';
@@ -10,7 +11,6 @@ import 'package:movie_thing/models/movie.dart';
 import 'package:movie_thing/models/functions.dart';
 import 'package:movie_thing/screens/movie_detail.dart';
 import 'package:movie_thing/screens/search_view.dart';
-import 'package:movie_thing/screens/welcome.dart';
 import 'package:movie_thing/screens/widgets.dart';
 import 'package:movie_thing/theme/theme_state.dart';
 import 'package:movie_thing/screens/favorites.dart';
@@ -190,8 +190,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: WelcomePage(),
+      drawer: const Drawer(
+        child: LoginPage(),
       ),
       body: Container(
         color: state.themeData.primaryColor,

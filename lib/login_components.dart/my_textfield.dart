@@ -10,7 +10,7 @@ class MyTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    required this.obscureText,
+    required this.obscureText, Future <void> Function(String email)? onSubmitted,
   });
 
   @override
