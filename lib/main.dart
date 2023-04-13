@@ -153,19 +153,34 @@ class _MyHomePageState extends State<MyHomePage> {
             color: state.themeData.colorScheme.secondary,
             icon: const Icon(Icons.account_circle),
             onPressed: () {
-              // Retrieve the list of favorite movies from the MovieManager
-              final List<Movie> favorites =
-                  Provider.of<MovieManager>(context, listen: false).favorites;
+              print('Favorites button tapped');
+              final user = auth.currentUser;
+              print('Current user: $user');
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FavoritesPage(
-                    favorites: favorites,
-                    genres: const {},
+              // Retrieve the list of favorite movies from the MovieManager
+              if (user != null) {
+                final List<Movie> favorites =
+                    Provider.of<MovieManager>(context, listen: false).favorites;
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FavoritesPage(
+                      favorites: favorites,
+                      genres: const {},
+                    ),
                   ),
-                ),
-              );
+                );
+              } else {
+                print('test print 1000');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content:
+                        Text('You must be logged in to access this feature'),
+                  ),
+                );
+                print('User not logged in, access denied');
+              }
             },
           ),
 

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FireAuth {
+  //REKISTERÖINTI
   static Future<User?> registerUsingEmailPassword({
     required BuildContext context,
     required String email,
@@ -59,6 +60,7 @@ class FireAuth {
     return user;
   }
 
+  //KIRJAUTUMINEN
   static Future<User?> signInUsingEmailPassword({
     required String email,
     required String password,

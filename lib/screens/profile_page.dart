@@ -40,7 +40,8 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const MyApp()));
                   },
                   icon: const Icon(
                     Icons.arrow_back,
