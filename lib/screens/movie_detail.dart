@@ -10,6 +10,8 @@ import 'package:movie_thing/models/movieManager.dart';
 import 'package:movie_thing/screens/widgets.dart';
 import 'package:provider/provider.dart';
 
+import '../main.dart';
+
 //SIVU MISSÄ NÄKEE LEFFAN TIEDOT KUN KUVAKETTA KLIKATTU
 
 class MovieDetailPage extends StatefulWidget {
@@ -167,25 +169,50 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                                   color: Colors.yellow,
                                                 ),
                                                 IconButton(
-                                                  icon: Icon(
-                                                    isFavorite
-                                                        ? Icons.favorite
-                                                        : Icons.favorite_border,
-                                                    color: iconColor,
-                                                  ),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      isFavorite = !isFavorite;
-                                                      iconColor = isFavorite
-                                                          ? Colors.red
-                                                          : Colors.white;
-                                                    });
-                                                    movieManager.toggleFavorite(
-                                                        widget.movie, context);
+                                                    icon: Icon(
+                                                      isFavorite
+                                                          ? Icons.favorite
+                                                          : Icons
+                                                              .favorite_border,
+                                                      color: iconColor,
+                                                    ),
+                                                    onPressed: () {
+                                                      print(
+                                                          'heart button clicked');
+                                                      final user =
+                                                          auth.currentUser;
+                                                      print(
+                                                          'Current user: $user');
 
-                                                    //print(isFavorite);
-                                                  },
-                                                )
+                                                      if (user != null) {
+                                                        setState(() {
+                                                          isFavorite =
+                                                              !isFavorite;
+                                                          iconColor = isFavorite
+                                                              ? Colors.red
+                                                              : Colors.white;
+                                                        });
+                                                        movieManager
+                                                            .toggleFavorite(
+                                                                widget.movie,
+                                                                context);
+
+                                                        //print(isFavorite);
+                                                      } else {
+                                                        print(
+                                                            'test print 1001');
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          const SnackBar(
+                                                            content: Text(
+                                                                'You must be logged in to access this feature'),
+                                                          ),
+                                                        );
+                                                        print(
+                                                            'user not logged in');
+                                                      }
+                                                    })
                                               ],
                                             ),
                                           )
