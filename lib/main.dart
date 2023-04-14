@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unused_field, avoid_print
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unused_field, avoid_print, unused_import
 
 import 'dart:convert';
 import 'dart:math';
@@ -16,18 +16,19 @@ import 'package:movie_thing/theme/theme_state.dart';
 import 'package:movie_thing/screens/favorites.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'database_helper.dart';
 import 'models/movieManager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 List<Movie> favorites = [];
 final auth = FirebaseAuth.instance;
+final dbHelper = DatabaseHelper();
 
 Future<void> main() async => {
+      WidgetsFlutterBinding.ensureInitialized(),
+      await Firebase.initializeApp(),
+      await dbHelper.init(),
       runApp(const MyApp()),
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      )
     };
 
 class MyApp extends StatelessWidget {

@@ -44,6 +44,7 @@ class Movie {
   String? backdropPath;
   bool? adult;
   String? overview;
+  String? fbid;
   late String releaseDate;
 
   Movie(
@@ -60,6 +61,7 @@ class Movie {
       this.backdropPath,
       this.adult,
       this.overview,
+      this.fbid,
       this.releaseDate = ''});
 
   Movie.fromJson(Map<String, dynamic> json) {

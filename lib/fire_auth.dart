@@ -1,4 +1,5 @@
 // ignore_for_file: deprecated_member_use, avoid_print, use_build_context_synchronously
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,14 @@ class FireAuth {
       );
 
       user = userCredential.user;
+      if (user != null) {
+        // Add an empty list of movies to the user's data in Firebase
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'email': user.email,
+          'favoriteMovies': [], // <-- Add an empty list of favorite movies
+        });
+      }
+
       await user!.updateProfile(displayName: email);
       await user.reload();
       user = auth.currentUser;
@@ -130,5 +139,8 @@ class FireAuth {
     return refreshedUser;
   }
 
-  isLoggedIn() {}
+  static bool isLoggedIn() {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user != null;
+  }
 }

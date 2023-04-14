@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "847048933955",
+    "firebase_url": "https://movielist-f7b33-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "movielist-f7b33",
     "storage_bucket": "movielist-f7b33.appspot.com"
   },

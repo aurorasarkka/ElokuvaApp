@@ -1,35 +1,54 @@
-// ignore_for_file: file_names, avoid_print
+// ignore_for_file: avoid_print, file_names, unused_import
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_thing/database_helper.dart';
+import 'package:movie_thing/firebase_helper.dart';
+import '../main.dart';
 import 'movie.dart';
 
 class MovieManager extends ChangeNotifier {
-  final List<Movie> _favorites;
+  late final List<Movie> _favorites;
 
   MovieManager(List<Movie> favorites) : _favorites = List.from(favorites);
 
   // Returns the list of favorite movies
   List<Movie> get favorites => _favorites;
+  //final FirebaseHelper _firebaseHelper = FirebaseHelper();
+  final DatabaseHelper _databaseHelper = DatabaseHelper();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  get movies => null;
+
+  Future<List<Map<String, dynamic>>> queryAllRows(DatabaseHelper db) async {
+    return await db.query(DatabaseHelper.table);
+  }
+
+  void loadFromdb() async {
+    final list = await queryAllRows(_databaseHelper);
+    _favorites = list.map((map) => Movie.fromJson(map)).toList();
+    notifyListeners();
+  }
+
+  /*final userId = _auth.currentUser?.uid;
+      if (userId != null) {
+        await _firebaseHelper.updateFavorites(userId, _favorites);
+      }*/
 
   // Adds a movie to the list of favorite movies and notifies any listeners that the state has changed
-  void add(Movie movie) {
-    print('adding ${movie.title}');
+  void addMovie(Movie movie) async {
     if (!_favorites.contains(movie)) {
       _favorites.add(movie);
-      print('not.adding ${movie.title}');
+      await _databaseHelper.updateMovies(_favorites);
+      print(favorites); // Update movies in database
       notifyListeners();
     }
   }
 
   // Removes a movie from the list of favorite movies and notifies any listeners that the state has changed
-  void remove(Movie movie) {
+  void removeMovie(Movie movie) async {
     _favorites.remove(movie);
-    notifyListeners();
-  }
-
-  // Updates the favorite movie list by adding the new movie and removing the old movie
-  void update(Movie oldMovie, Movie newMovie) {
-    final index = _favorites.indexOf(oldMovie);
-    _favorites[index] = newMovie;
+    await _databaseHelper.updateMovies(_favorites); // Update movies in database
     notifyListeners();
   }
 
@@ -64,7 +83,7 @@ class MovieManager extends ChangeNotifier {
       }
     }
     if (found != null) {
-      remove(found);
+      removeMovie(found);
       print('Removed from favorites: ${movie.title}');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -73,8 +92,9 @@ class MovieManager extends ChangeNotifier {
         ),
       );
     } else {
-      add(movie);
+      addMovie(movie);
       print('Added to favorites: ${movie.title}');
+      print(favorites);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Added to favorites: ${movie.title}'),
@@ -83,4 +103,13 @@ class MovieManager extends ChangeNotifier {
       );
     }
   }
+
+  /*loadFromFirebase() async {
+    final firebaseHelper = FirebaseHelper();
+    final list = await firebaseHelper.getData();
+    for (Movie item in list) {
+      _favorites.add(item);
+    }
+    notifyListeners();
+  }*/
 }
