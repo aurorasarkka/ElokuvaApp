@@ -55,7 +55,6 @@ class DatabaseHelper {
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
     print('Creating database table...');
-
     await db.execute('''
           CREATE TABLE $table (
         $columnVoteCount int,
