@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, file_names, unused_import
+// ignore_for_file: avoid_print, file_names, unused_import, unused_field
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
