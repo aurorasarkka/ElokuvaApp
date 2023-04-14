@@ -50,20 +50,20 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE $table (
         $columnVoteCount INTEGER,
-        $columnId INTEGER, 
-        $columnVideo BOOL,
-        $columnVoteAverage REAL,
-        $columnTitle TEXT,
-        $columnPopularity REAL,
-        $columnPosterPath TEXT,
-        $columnOriginalLanguage TEXT, 
-        $columnOriginalTitle TEXT,
-        $columnGenreIds TEXT,
-        $columnBackdropPath TEXT,
-        $columnAdult BOOL, 
-        $columnOverview TEXT,
-        $columnFbid TEXT,
-        $columnReleaseDate TEXT,
+      $columnId INTEGER, 
+      $columnVideo INTEGER,
+      $columnVoteAverage REAL,
+      $columnTitle TEXT,
+      $columnPopularity REAL,
+      $columnPosterPath TEXT,
+      $columnOriginalLanguage TEXT, 
+      $columnOriginalTitle TEXT,
+      $columnGenreIds TEXT,
+      $columnBackdropPath TEXT,
+      $columnAdult INTEGER, 
+      $columnOverview TEXT,
+      $columnFbid TEXT,
+      $columnReleaseDate TEXT
         
       )
           ''');
