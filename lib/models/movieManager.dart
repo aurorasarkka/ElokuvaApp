@@ -52,7 +52,8 @@ class MovieManager extends ChangeNotifier {
   // Removes a movie from the list of favorite movies and notifies any listeners that the state has changed
   void removeMovie(Movie movie) async {
     _favorites.remove(movie);
-    await _databaseHelper.updateMovies(_favorites); // Update movies in database
+    await _databaseHelper.updateMovies(_favorites);
+    _favorites = await loadFromdb();
     notifyListeners();
   }
 
