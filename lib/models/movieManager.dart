@@ -35,17 +35,18 @@ class MovieManager extends ChangeNotifier {
         await _firebaseHelper.updateFavorites(userId, _favorites);
       }*/
 
-  // Adds a movie to the list of favorite movies and notifies any listeners that the state has changed
+// Adds a movie to the list of favorite movies and notifies any listeners that the state has changed
   void addMovie(Movie movie) async {
     if (!_favorites.contains(movie)) {
       _favorites.add(movie);
-      await _databaseHelper.updateMovies(_favorites);
-      print(favorites); // Update movies in database
+      await _databaseHelper
+          .updateMovies(_favorites); // Update movies in database
+      print(favorites);
       notifyListeners();
     }
   }
 
-  // Removes a movie from the list of favorite movies and notifies any listeners that the state has changed
+// Removes a movie from the list of favorite movies and notifies any listeners that the state has changed
   void removeMovie(Movie movie) async {
     _favorites.remove(movie);
     await _databaseHelper.updateMovies(_favorites); // Update movies in database

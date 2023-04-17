@@ -57,9 +57,9 @@ class DatabaseHelper {
     print('Creating database table...');
     await db.execute('''
           CREATE TABLE $table (
-        $columnVoteCount int,
-        $columnId int, 
-        $columnVideo int,
+        $columnVoteCount num,
+        $columnId num, 
+        $columnVideo num,
         $columnVoteAverage num,
         $columnTitle String,
         $columnPopularity num,
@@ -68,7 +68,7 @@ class DatabaseHelper {
         $columnOriginalTitle String,
         $columnGenreIds String,
         $columnBackdropPath String,
-        $columnAdult int, 
+        $columnAdult num, 
         $columnOverview String,
         $columnFbid String,
         $columnReleaseDate String
@@ -81,13 +81,13 @@ class DatabaseHelper {
   Future<int> insertFavoriteMovie(Movie movie) async {
     // Add the new movie to the favorites list
     DatabaseHelper.favorites.addMovie(movie);
-    print("Movie added to database: ${movie.title}");
 
     // Ensure that _db has been initialized before accessing it
     if (_db == null) {
       await init();
     }
 
+    // Insert the movie into the database
     final Map<String, dynamic> row = movie.toJson();
     return await _db.insert(table, row);
   }
