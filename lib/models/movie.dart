@@ -33,7 +33,7 @@ class MovieList {
 class Movie {
   int? voteCount;
   int? id;
-  bool? video;
+  int? video; // use 0 for false, 1 for true
   String? voteAverage;
   late String title;
   double? popularity;
@@ -42,7 +42,7 @@ class Movie {
   String? originalTitle;
   List<int>? genreIds;
   String? backdropPath;
-  bool? adult;
+  int? adult; // use 0 for false, 1 for true
   String? overview;
   String? fbid;
   late String releaseDate;
@@ -52,7 +52,7 @@ class Movie {
       this.id,
       this.video,
       this.voteAverage,
-      this.title = '',
+      required this.title,
       this.popularity,
       this.posterPath,
       this.originalLanguage,
@@ -62,12 +62,12 @@ class Movie {
       this.adult,
       this.overview,
       this.fbid,
-      this.releaseDate = ''});
+      required this.releaseDate});
 
   Movie.fromJson(Map<String, dynamic> json) {
     voteCount = json['vote_count'];
     id = json['id'];
-    video = json['video'];
+    video = json['video'] == true ? 1 : 0;
     voteAverage = json['vote_average'].toString();
     title = json['title'];
     popularity = json['popularity'];
@@ -76,7 +76,7 @@ class Movie {
     originalTitle = json['original_title'];
     genreIds = json['genre_ids'].cast<int>();
     backdropPath = json['backdrop_path'];
-    adult = json['adult'];
+    adult = json['adult'] == true ? 1 : 0;
     overview = json['overview'];
     releaseDate = json['release_date'];
   }
@@ -85,7 +85,7 @@ class Movie {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['vote_count'] = voteCount;
     data['id'] = id;
-    data['video'] = video;
+    data['video'] = video == 1;
     data['vote_average'] = voteAverage;
     data['title'] = title;
     data['popularity'] = popularity;
@@ -94,7 +94,7 @@ class Movie {
     data['original_title'] = originalTitle;
     data['genre_ids'] = genreIds;
     data['backdrop_path'] = backdropPath;
-    data['adult'] = adult;
+    data['adult'] = adult == 1;
     data['overview'] = overview;
     data['release_date'] = releaseDate;
     return data;

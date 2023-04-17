@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unused_field, avoid_print, unused_import
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unused_field, avoid_print, unused_import, unused_local_variable
 
 import 'dart:convert';
 import 'dart:math';
@@ -20,7 +20,6 @@ import 'database_helper.dart';
 import 'models/movieManager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-List<Movie> favorites = [];
 final auth = FirebaseAuth.instance;
 final dbHelper = DatabaseHelper();
 
@@ -166,9 +165,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FavoritesPage(
-                      favorites: favorites,
-                      genres: const {},
+                    builder: (context) => const FavoritesPage(
+                      genres: {},
                     ),
                   ),
                 );

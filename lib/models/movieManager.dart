@@ -8,13 +8,17 @@ import '../main.dart';
 import 'movie.dart';
 
 class MovieManager extends ChangeNotifier {
-  late final List<Movie> _favorites;
+  List<Movie> _favorites;
 
-  MovieManager(List<Movie> favorites) : _favorites = List.from(favorites);
-
+  MovieManager(List<Movie> favorites) : _favorites = favorites {
+    loadFromdb().then((movies) {
+      _favorites.addAll(movies);
+      notifyListeners();
+    });
+  }
   // Returns the list of favorite movies
   List<Movie> get favorites => _favorites;
-  //final FirebaseHelper _firebaseHelper = FirebaseHelper();
+
   final DatabaseHelper _databaseHelper = DatabaseHelper();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -24,29 +28,26 @@ class MovieManager extends ChangeNotifier {
     return await db.query(DatabaseHelper.table);
   }
 
-  void loadFromdb() async {
+  Future<List<Movie>> loadFromdb() async {
+    print('Loading movies from database...');
     final list = await queryAllRows(_databaseHelper);
-    _favorites = list.map((map) => Movie.fromJson(map)).toList();
-    notifyListeners();
+    return list.map((map) => Movie.fromJson(map)).toList();
   }
 
-  /*final userId = _auth.currentUser?.uid;
-      if (userId != null) {
-        await _firebaseHelper.updateFavorites(userId, _favorites);
-      }*/
-
-// Adds a movie to the list of favorite movies and notifies any listeners that the state has changed
+  // Adds a movie to the list of favorite movies and notifies any listeners that the state has changed
   void addMovie(Movie movie) async {
     if (!_favorites.contains(movie)) {
       _favorites.add(movie);
       await _databaseHelper
           .updateMovies(_favorites); // Update movies in database
-      print(favorites);
+      _favorites = await loadFromdb();
+      print('Movie added: $movie');
+      print('Favorites list: $_favorites');
       notifyListeners();
     }
   }
 
-// Removes a movie from the list of favorite movies and notifies any listeners that the state has changed
+  // Removes a movie from the list of favorite movies and notifies any listeners that the state has changed
   void removeMovie(Movie movie) async {
     _favorites.remove(movie);
     await _databaseHelper.updateMovies(_favorites); // Update movies in database
@@ -92,17 +93,11 @@ class MovieManager extends ChangeNotifier {
           duration: const Duration(seconds: 5),
         ),
       );
-    } else {
-      addMovie(movie);
-      print('Added to favorites: ${movie.title}');
-      print(favorites);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Added to favorites: ${movie.title}'),
-          duration: const Duration(seconds: 5),
-        ),
-      );
     }
+  }
+
+  List<Movie> getFavoriteMovies() {
+    return favorites;
   }
 
   /*loadFromFirebase() async {

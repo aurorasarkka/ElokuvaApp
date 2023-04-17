@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, avoid_print
+// ignore_for_file: unused_import, avoid_print, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
@@ -8,6 +8,7 @@ import 'package:movie_thing/models/movie.dart';
 import 'package:movie_thing/models/movieManager.dart';
 
 class DatabaseHelper {
+  late Database _db;
   static MovieManager favorites = MovieManager(<Movie>[]);
   static const _databaseName = "MovieDatabase.db";
   static const _databaseVersion = 1;
@@ -29,14 +30,10 @@ class DatabaseHelper {
   static const columnFbid = 'Fbid';
   static const columnReleaseDate = 'release_date';
 
-  late Database _db;
-
   DatabaseHelper() {
     init();
   }
-  //static const columnFbid = 'fbid';
 
-  // this opens the database (and creates it if it doesn't exist)
   Future<void> init() async {
     try {
       final documentsDirectory = await getApplicationDocumentsDirectory();
@@ -52,7 +49,7 @@ class DatabaseHelper {
     }
   }
 
-  // SQL code to create the database table
+  // SQL code to create the database table.
   Future _onCreate(Database db, int version) async {
     print('Creating database table...');
     await db.execute('''
@@ -72,37 +69,35 @@ class DatabaseHelper {
         $columnOverview String,
         $columnFbid String,
         $columnReleaseDate String
-        
       )
           ''');
-    //$columnFbid TEXT
   }
 
   Future<int> insertFavoriteMovie(Movie movie) async {
-    // Add the new movie to the favorites list
+    // Add the new movie to the favorites list.
     DatabaseHelper.favorites.addMovie(movie);
 
+    // Ensure that _db has been initialized before accessing it.
+    if (_db == null) {
+      await init();
+    }
+
+    // Insert the movie into the database.
+    final Map<String, dynamic> row = movie.toJson();
+    return await _db.insert(table, row);
+  }
+
+  Future<List<Movie>> queryAllRows() async {
     // Ensure that _db has been initialized before accessing it
     if (_db == null) {
       await init();
     }
 
-    // Insert the movie into the database
-    final Map<String, dynamic> row = movie.toJson();
-    return await _db.insert(table, row);
-  }
+    // Query all rows from the table and map the results to Movie objects
+    final List<Map<String, dynamic>> rows = await _db.query(table);
+    final List<Movie> movies = rows.map((row) => Movie.fromJson(row)).toList();
 
-  Future<List<Map<String, dynamic>>> queryAllRows() async {
-    // Get the list of movies from the favorites list
-    final movies = DatabaseHelper.favorites.movies;
-
-    // Create a list of rows from the movies list
-    final List<Map<String, dynamic>> rows = [];
-    for (final movie in movies) {
-      rows.add(movie.toJson());
-    }
-
-    return rows;
+    return movies;
   }
 
   Future<int> update(Map<String, dynamic> row) async {
