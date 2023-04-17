@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, file_names, unused_import, unused_field
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_thing/database_helper.dart';
 import 'package:movie_thing/firebase_helper.dart';
@@ -21,6 +22,7 @@ class MovieManager extends ChangeNotifier {
 
   final DatabaseHelper _databaseHelper = DatabaseHelper();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _db = FirebaseDatabase.instance.ref();
 
   get movies => null;
 

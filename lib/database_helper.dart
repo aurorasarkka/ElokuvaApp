@@ -8,7 +8,7 @@ import 'package:movie_thing/models/movie.dart';
 import 'package:movie_thing/models/movieManager.dart';
 
 class DatabaseHelper {
-  late Database _db;
+  static late Database _db;
   static MovieManager favorites = MovieManager(<Movie>[]);
   static const _databaseName = "MovieDatabase.db";
   static const _databaseVersion = 1;
@@ -77,10 +77,13 @@ class DatabaseHelper {
     // Add the new movie to the favorites list.
     DatabaseHelper.favorites.addMovie(movie);
 
-    // Ensure that _db has been initialized before accessing it.
+    // Initialize the database if it has not been initialized yet
     if (_db == null) {
       await init();
     }
+
+    // Wait for the init method to complete before proceeding
+    await init();
 
     // Insert the movie into the database.
     final Map<String, dynamic> row = movie.toJson();
