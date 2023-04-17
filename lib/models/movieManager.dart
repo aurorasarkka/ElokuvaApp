@@ -40,11 +40,8 @@ class MovieManager extends ChangeNotifier {
   void addMovie(Movie movie) async {
     if (!_favorites.contains(movie)) {
       _favorites.add(movie);
-      await _databaseHelper
-          .updateMovies(_favorites); // Update movies in database
-      _favorites = await loadFromdb();
       print('Movie added: $movie');
-      print('Favorites list: $_favorites');
+      await _databaseHelper.updateMovies(_favorites);
       notifyListeners();
     }
   }
@@ -96,6 +93,8 @@ class MovieManager extends ChangeNotifier {
           duration: const Duration(seconds: 5),
         ),
       );
+    } else {
+      addMovie(movie);
     }
   }
 
