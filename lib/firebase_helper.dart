@@ -18,9 +18,9 @@ class FirebaseHelper {
     final userFavoritesRef =
         firebaseRef.child('users').child(userId).child('favorites');
 
-    final DatabaseEvent event = (await userFavoritesRef.once());
+    final DatabaseEvent event = await userFavoritesRef.once();
 
-    var snapshot = event.snapshot;
+    DataSnapshot snapshot = event.snapshot;
     final data = snapshot.value;
 
     for (var child in snapshot.children) {
@@ -28,22 +28,7 @@ class FirebaseHelper {
       list.add(movie);
     }
     return list;
-    /*
-    if (data.containsKey('favorites')) {
-      final favoritesData = data['favorites'] as List<dynamic>;
-      final favorites =
-          favoritesData.map((movieData) => Movie.fromJson(movieData)).toList();
-      return favorites;
-    } else {
-      return [];
-    }*/
   }
-
-  /*Future<void> updateFavorites(String userId, List<Movie> favorites) async {
-    final userFavoritesRef =
-        firebaseRef.child('users').child(userId).child('favorites');
-    await userFavoritesRef.set(favorites);
-  }*/
 
   Future<void> updateFavorites(String userId, List<Movie> favorites) async {
     final userFavoritesRef =

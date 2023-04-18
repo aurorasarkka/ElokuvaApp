@@ -89,26 +89,28 @@ class FavoritesPage extends StatelessWidget {
                     ),
                   );
                 },
-                child: ListTile(
-                  title: Text(
-                    movie.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                child: IntrinsicHeight(
+                  child: ListTile(
+                    title: Text(
+                      movie.title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  subtitle: Text(
-                    movie.releaseDate,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                    subtitle: Text(
+                      movie.releaseDate,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  leading: Flexible(
-                    child: Image.network(
-                      'https://image.tmdb.org/t/p/w185/${movie.posterPath}',
-                      fit: BoxFit.contain,
+                    leading: Flexible(
+                      child: Image.network(
+                        'https://image.tmdb.org/t/p/w185/${movie.posterPath}',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                 ),
