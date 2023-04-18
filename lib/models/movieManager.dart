@@ -77,7 +77,7 @@ class MovieManager extends ChangeNotifier {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Removed from favorites: ${movie.title}'),
-          duration: const Duration(seconds: 5),
+          duration: const Duration(seconds: 3),
         ),
       );
     } else {
