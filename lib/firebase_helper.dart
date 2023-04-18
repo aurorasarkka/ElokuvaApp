@@ -61,20 +61,29 @@ class FirebaseHelper {
     }
   }
 
-  Future<List<Movie>> getData() async {
+  Future<List<Movie>> getData(String uid) async {
+    print('Getting data for user $uid...');
+
     final favorites = <Movie>[];
-    final userFavoritesRef = firebaseRef
-        .child('users')
-        .child(FirebaseAuth.instance.currentUser!.uid)
-        .child('favorites');
+    final userFavoritesRef =
+        firebaseRef.child('users').child(uid).child('favorites');
     final event = await userFavoritesRef.once();
     final snapshot = event.snapshot;
 
     if (snapshot.value != null) {
-      final favoritesData = snapshot.value as List<dynamic>;
-      final favoritesList =
-          favoritesData.map((movieData) => Movie.fromJson(movieData)).toList();
-      favorites.addAll(favoritesList);
+      final dynamic data = snapshot.value;
+      print('Data retrieved: $data');
+      if (data is List<dynamic>) {
+        final favoritesData = data;
+        print('Favorites data retrieved: $favoritesData');
+        final favoritesList = favoritesData
+            .map((movieData) => Movie.fromJson(movieData))
+            .toList();
+        print('Favorites list retrieved: $favoritesList');
+        favorites.addAll(favoritesList);
+      }
+    } else {
+      print('No data found.');
     }
     return favorites;
   }
