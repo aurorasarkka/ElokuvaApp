@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, avoid_print
 
 import 'dart:convert';
 
@@ -9,8 +9,8 @@ import 'package:movie_thing/models/movie.dart';
 class FirebaseHelper {
   final DatabaseReference firebaseRef = FirebaseDatabase.instance.ref();
 
-  Future<void> addUser(String userId) async {
-    final userRef = firebaseRef.child('users').child(userId);
+  Future<void> addUser(String email) async {
+    final userRef = firebaseRef.child('users').child(email);
     await userRef.set({'favorites': []});
   }
 
@@ -47,13 +47,18 @@ class FirebaseHelper {
   }*/
 
   Future<void> updateFavorites(String userId, List<Movie> favorites) async {
-    print('hello');
     final userFavoritesRef =
         firebaseRef.child('users').child(userId).child('favorites');
-    final favoritesMapList = favorites.map((movie) => movie.toJson()).toList();
-    final jsonFavorites = json.encode(favoritesMapList);
-    print(jsonFavorites);
-    await userFavoritesRef.push().set(jsonFavorites);
+
+    // Remove existing favorites
+    await userFavoritesRef.remove();
+
+    // Set each movie as a child node of the favorites node with the title as the key
+    for (final movie in favorites) {
+      final title = movie.title.replaceAll('.', '-');
+      final movieRef = userFavoritesRef.child(title);
+      await movieRef.set(movie.toJson());
+    }
   }
 
   Future<List<Movie>> getData() async {
