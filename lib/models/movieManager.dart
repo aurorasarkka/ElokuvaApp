@@ -1,9 +1,7 @@
 // ignore_for_file: avoid_print, file_names, unused_import, unused_field
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_thing/database_helper.dart';
 import 'package:movie_thing/firebase_helper.dart';
 import '../main.dart';
 import 'movie.dart';
@@ -12,36 +10,24 @@ class MovieManager extends ChangeNotifier {
   List<Movie> _favorites;
 
   MovieManager(List<Movie> favorites) : _favorites = favorites {
-    loadFromdb().then((movies) {
+    loadFromFirebase().then((movies) {
       _favorites.addAll(movies);
       notifyListeners();
     });
   }
+
   // Returns the list of favorite movies
   List<Movie> get favorites => _favorites;
 
-  final DatabaseHelper _databaseHelper = DatabaseHelper();
+  final FirebaseHelper _firebaseHelper = FirebaseHelper();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final DatabaseReference _db = FirebaseDatabase.instance.ref();
-
-  get movies => null;
-
-  Future<List<Map<String, dynamic>>> queryAllRows(DatabaseHelper db) async {
-    return await db.query(DatabaseHelper.table);
-  }
-
-  Future<List<Movie>> loadFromdb() async {
-    print('Loading movies from database...');
-    final list = await queryAllRows(_databaseHelper);
-    return list.map((map) => Movie.fromJson(map)).toList();
-  }
 
   // Adds a movie to the list of favorite movies and notifies any listeners that the state has changed
   void addMovie(Movie movie) async {
     if (!_favorites.contains(movie)) {
       _favorites.add(movie);
       print('Movie added: $movie');
-      await _databaseHelper.updateMovies(_favorites);
+      await _firebaseHelper.updateFavorites(_auth.currentUser!.uid, _favorites);
       notifyListeners();
     }
   }
@@ -49,8 +35,8 @@ class MovieManager extends ChangeNotifier {
   // Removes a movie from the list of favorite movies and notifies any listeners that the state has changed
   void removeMovie(Movie movie) async {
     _favorites.remove(movie);
-    await _databaseHelper.updateMovies(_favorites);
-    _favorites = await loadFromdb();
+    await _firebaseHelper.updateFavorites(_auth.currentUser!.uid, _favorites);
+    _favorites = await loadFromFirebase();
     notifyListeners();
   }
 
@@ -98,16 +84,9 @@ class MovieManager extends ChangeNotifier {
     }
   }
 
-  List<Movie> getFavoriteMovies() {
-    return favorites;
+  Future<List<Movie>> loadFromFirebase() async {
+    print('Loading movies from Firebase...');
+    final list = await _firebaseHelper.getFavorites(_auth.currentUser!.uid);
+    return list;
   }
-
-  /*loadFromFirebase() async {
-    final firebaseHelper = FirebaseHelper();
-    final list = await firebaseHelper.getData();
-    for (Movie item in list) {
-      _favorites.add(item);
-    }
-    notifyListeners();
-  }*/
 }
