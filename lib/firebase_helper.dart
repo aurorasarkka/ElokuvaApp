@@ -1,7 +1,6 @@
-// ignore_for_file: unnecessary_null_comparison, avoid_print
+// ignore_for_file: unnecessary_null_comparison, avoid_print, unused_import
 
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:movie_thing/models/movie.dart';
@@ -49,9 +48,6 @@ class FirebaseHelper {
   Future<void> updateFavorites(String userId, List<Movie> favorites) async {
     final userFavoritesRef =
         firebaseRef.child('users').child(userId).child('favorites');
-
-    // Remove existing favorites
-    await userFavoritesRef.remove();
 
     // Set each movie as a child node of the favorites node with the title as the key
     for (final movie in favorites) {
