@@ -9,8 +9,8 @@ import 'package:movie_thing/models/movie.dart';
 class FirebaseHelper {
   final DatabaseReference firebaseRef = FirebaseDatabase.instance.ref();
 
-  Future<void> addUser(String email) async {
-    final userRef = firebaseRef.child('users').child(email);
+  Future<void> addUser(String userId) async {
+    final userRef = firebaseRef.child('users').child(userId);
     await userRef.set({'favorites': []});
   }
 
