@@ -37,7 +37,6 @@ class MovieManager extends ChangeNotifier {
     _favorites.remove(movie);
     print('Removed from favorites: ${movie.title}');
     await _firebaseHelper.updateFavorites(_auth.currentUser!.uid, _favorites);
-    _favorites = await loadFromFirebase();
     notifyListeners();
   }
 
@@ -87,8 +86,8 @@ class MovieManager extends ChangeNotifier {
 
   Future<List<Movie>> loadFromFirebase() async {
     try {
-      print('Loading movies from Firebase...');
       final user = _auth.currentUser;
+      print('Current user: ${user?.uid}');
       if (user == null) {
         print('User not authenticated');
         return [];
