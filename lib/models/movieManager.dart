@@ -93,7 +93,7 @@ class MovieManager extends ChangeNotifier {
         print('User not authenticated');
         return [];
       }
-      final list = await _firebaseHelper.getData(user.uid);
+      final list = await _firebaseHelper.getFavorites(user.uid);
       print('Loaded ${list.length} movies from Firebase');
       print(list);
       return list;

@@ -14,20 +14,27 @@ class FirebaseHelper {
   }
 
   Future<List<Movie>> getFavorites(String userId) async {
-    List<Movie> list = [];
     final userFavoritesRef =
         firebaseRef.child('users').child(userId).child('favorites');
 
-    final DatabaseEvent event = await userFavoritesRef.once();
+    final event = await userFavoritesRef.once();
+    final snapshot = event.snapshot;
 
-    DataSnapshot snapshot = event.snapshot;
-    final data = snapshot.value;
+    if (snapshot.value != null) {
+      final dynamic data = snapshot.value;
+      final List<Movie> favorites = [];
 
-    for (var child in snapshot.children) {
-      Movie movie = Movie.fromJson(child.value as Map<String, dynamic>);
-      list.add(movie);
+      if (data is Map<String, dynamic>) {
+        data.forEach((key, value) {
+          final movie = Movie.fromJson(value as Map<String, dynamic>);
+          favorites.add(movie);
+        });
+      }
+
+      return favorites;
+    } else {
+      return [];
     }
-    return list;
   }
 
   Future<void> updateFavorites(String userId, List<Movie> favorites) async {
@@ -38,34 +45,8 @@ class FirebaseHelper {
     for (final movie in favorites) {
       final title = movie.title.replaceAll('.', '-');
       final movieRef = userFavoritesRef.child(title);
+      print('Movie to update: ${movie.toJson()}');
       await movieRef.set(movie.toJson());
     }
-  }
-
-  Future<List<Movie>> getData(String uid) async {
-    print('Getting data for user $uid...');
-
-    final favorites = <Movie>[];
-    final userFavoritesRef =
-        firebaseRef.child('users').child(uid).child('favorites');
-    final event = await userFavoritesRef.once();
-    final snapshot = event.snapshot;
-
-    if (snapshot.value != null) {
-      final dynamic data = snapshot.value;
-      print('Data retrieved: $data');
-      if (data is List<dynamic>) {
-        final favoritesData = data;
-        print('Favorites data retrieved: $favoritesData');
-        final favoritesList = favoritesData
-            .map((movieData) => Movie.fromJson(movieData))
-            .toList();
-        print('Favorites list retrieved: $favoritesList');
-        favorites.addAll(favoritesList);
-      }
-    } else {
-      print('No data found.');
-    }
-    return favorites;
   }
 }
