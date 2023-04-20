@@ -8,7 +8,13 @@ Tämä sovellus tarjoaa käyttäjille mahdollisuuden selata elokuvia, etsiä elo
 - Suosikkien tallentaminen/poistaminen
 - Random elokuvan hakeminen (erillinen nappi)
 
-### Paketit
+### Paketit (flutter pub deps)
+Lisäsimme sovellukseen mm. nämä paketit: 
+
+- **carousel_slider 4.2.1** --> etusivun kuvakaruselli
+- **firebase_auth 4.4.0** --> tietojen tallennus
+- **flutter 0.0.0** --> toiminta
+- **material_color_utilities 0.2.0** --> sovelluksen värien hallinta
 
 ### Ulkoiset palvelut 
 - **API (TMDB):** 
