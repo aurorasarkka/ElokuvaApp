@@ -23,19 +23,19 @@ Valitsimme käyttää työssä TMDB:n APIa, koska se oli ilmainen ja siihen löy
 Käytämme Firebasea käyttäjien tallentamiseen,sekä rekisteröinnin ja kirjautumisen validointiin. Lisäksi tallennamme jokaisen käyttäjän suosikit-listan Firebase Realtime tietokantaan, mistä tiedot haetaan sovellukseen suosikit näkymään. 
 
 ### Näkymät
-- Etusivu
+**Etusivu
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Etusivu.jpeg" width=20% height=20%>
-- Rekisteröinti
+Rekisteröinti
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Rekisteröinti.jpeg" width=20% height=20%>
-- Kirjautuminen
+Kirjautuminen
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Kirjautuminen.jpeg" width=20% height=20%>
-- Kirjautunut käyttäjä
+Kirjautunut käyttäjä
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Kirjautunut%20käyttäjä.jpeg" width=20% height=20%>
-- Elokuvan info/tiedot
+Elokuvan info/tiedot
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Elokuva%20info.jpeg" width=20% height=20%>
-- Haku
+Haku
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Haku.jpeg" width=20% height=20%>
-- Suosikit
+Suosikit**
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Suosikit.jpeg" width=20% height=20%>
 
 ### Linkki esimerkkikoodiin
