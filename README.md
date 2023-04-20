@@ -1,2 +1,30 @@
-# Elokuva App (Flutter)
+# Elokuva App (Oona & Aurora)
 
+Tämä sovellus tarjoaa käyttäjille mahdollisuuden selata elokuvia, etsiä elokuvia nimeltä, lisätä niitä suosikkeihin ja poistaa niitä, rekisteröityä ja kirjautua sisään, sekä löytää satunnaisen elokuvan erillisellä painikkeella. Suuri osa sovelluksen ominaisuuksista on vain kirjautuneille käyttäjille, mistä sovellus ilmoittaa snackbar ilmoitusten muodossa. 
+
+### Ominaisuudet: 
+- Rekisteröinti ja kirjautuminen
+- Elokuvien haku (nimellä)
+- Suosikkien tallentaminen/poistaminen
+- Random elokuvan hakeminen (erillinen nappi)
+
+### Paketit
+
+### Ulkoiset palvelut 
+- **API (TMDB):** 
+Valitsimme käyttää työssä TMDB:n APIa, koska se oli ilmainen ja siihen löytyi selkeä dokumentaatio mitä hyödyntää. API:sta voimme hakea elokuvia erilaisten kriteerien perusteella (suositut, top rated yms). Saamme myös elokuvien tiedot APIn perusteella, kuten näyttelijät, arvosanat, esittely tekstin, kuvat yms. 
+- **Firebase:**
+Käytämme Firebasea käyttäjien tallentamiseen,sekä rekisteröinnin ja kirjautumisen validointiin. Lisäksi tallennamme jokaisen käyttäjän suosikit-listan Firebase Realtime tietokantaan, mistä tiedot haetaan sovellukseen suosikit näkymään. 
+
+### Näkymät
+- Etusivu
+- Rekisteröinti
+- Kirjautuminen + kirjautunut käyttäjä
+- Elokuvan info/tiedot
+- Haku
+- Suosikit
+
+### Linkki esimerkkikoodiin
+Käytimme työn pohjana valmista GitHub repositoriota, mutta lisäsimme siihen itse uusia näkymiä ja ominaisuuksia. Lisäsimme muun muassa rekisteröinnin ja kirjautumisen, suosikki näkymän ja suosikkien merkkaamisen ja random elokuva painikkeen. Valitsimme pohjan sillä perusteella, että se hyöndynsi samaa APIa, jota halusimme käyttää työssä.
+
+Tässä linkki alkuperäiseen sivuun: https://github.com/bimsina/Matinee-Flutter
