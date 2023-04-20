@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, unused_import
+
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -15,9 +17,13 @@ class FirebaseHelper {
   List<Movie> parseMovies(String jsonData) {
     print("Parsing movies data: $jsonData");
     try {
-      final parsed = json.decode(jsonData).cast<Map<String, dynamic>>();
-      print("Parsed JSON: $parsed");
-      return parsed.map<Movie>((json) => Movie.fromJson(json)).toList();
+      final decoded = json.decode(jsonData);
+      print("Decoded JSON type: ${decoded.runtimeType}");
+      if (decoded is List) {
+        return decoded.map<Movie>((json) => Movie.fromJson(json)).toList();
+      } else {
+        return [Movie.fromJson(decoded)];
+      }
     } catch (e) {
       print("Error parsing JSON: $e");
       return [];
@@ -25,11 +31,8 @@ class FirebaseHelper {
   }
 
   Future<List<Movie>> getFavorites(String userId) async {
-    final userFavoritesRef = firebaseRef
-        .child('users')
-        .child(userId)
-        .child('favorites')
-        .child(Title as String);
+    final userFavoritesRef =
+        firebaseRef.child('users').child(userId).child('favorites');
 
     final DatabaseEvent snapshot = await userFavoritesRef.once();
 
@@ -37,11 +40,12 @@ class FirebaseHelper {
 
     final List<Movie> favorites = [];
 
-    if (snapshot.snapshot.value != null && snapshot.snapshot.value is List) {
+    if (snapshot.snapshot.value != null && snapshot.snapshot.value is Map) {
       final dynamic data = snapshot.snapshot.value;
 
-      favorites
-          .addAll(parseMovies(data)); // add parsed movies to favorites list
+      data.forEach((key, value) {
+        favorites.addAll(parseMovies(json.encode(value)));
+      });
     }
 
     return favorites; // Return the list of movies
