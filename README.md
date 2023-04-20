@@ -24,6 +24,7 @@ Käytämme Firebasea käyttäjien tallentamiseen,sekä rekisteröinnin ja kirjau
 
 ### Näkymät
 - Etusivu
+![etusivu](https://github.com/aurorasarkka/ElokuvaApp/blob/main/Kuvakaappaukset/Etusivu.jpeg?raw=true)
 - Rekisteröinti
 - Kirjautuminen + kirjautunut käyttäjä
 - Elokuvan info/tiedot
