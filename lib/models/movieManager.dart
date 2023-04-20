@@ -7,7 +7,7 @@ import '../main.dart';
 import 'movie.dart';
 
 class MovieManager extends ChangeNotifier {
-  List<Movie> _favorites;
+  final List<Movie> _favorites;
 
   MovieManager(List<Movie> favorites) : _favorites = favorites {
     loadFromFirebase().then((movies) {

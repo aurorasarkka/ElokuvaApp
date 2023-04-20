@@ -62,7 +62,15 @@ class Movie {
       this.adult,
       this.overview,
       this.fbid,
-      required this.releaseDate});
+      required this.releaseDate,
+      required year,
+      required rated,
+      required released,
+      required runtime,
+      required List<String> genres,
+      required website,
+      required production,
+      required boxOffice});
 
   Movie.fromJson(Map<String, dynamic> json) {
     voteCount = json['vote_count'];
