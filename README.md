@@ -27,8 +27,9 @@ Käytämme Firebasea käyttäjien tallentamiseen,sekä rekisteröinnin ja kirjau
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Etusivu.jpeg" width=20% height=20%>
 - Rekisteröinti
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Rekisteröinti.jpeg" width=20% height=20%>
-- Kirjautuminen + kirjautunut käyttäjä
+- Kirjautuminen
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Kirjautuminenjpeg" width=20% height=20%>
+- Kirjautunut käyttäjä
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Kirjautunut%20käyttäjä" width=20% height=20%>
 - Elokuvan info/tiedot
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Elokuva%20info.jpeg" width=20% height=20%>
