@@ -26,10 +26,16 @@ Käytämme Firebasea käyttäjien tallentamiseen,sekä rekisteröinnin ja kirjau
 - Etusivu
 <img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Etusivu.jpeg" width=20% height=20%>
 - Rekisteröinti
+<img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Rekisteröinti.jpeg" width=20% height=20%>
 - Kirjautuminen + kirjautunut käyttäjä
+<img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Kirjautuminenjpeg" width=20% height=20%>
+<img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Kirjautunut%20käyttäjä" width=20% height=20%>
 - Elokuvan info/tiedot
+<img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Elokuva%20info.jpeg" width=20% height=20%>
 - Haku
+<img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Haku.jpeg" width=20% height=20%>
 - Suosikit
+<img src="https://github.com/aurorasarkka/ElokuvaApp/blob/master/Kuvakaappaukset/Suosikit.jpeg" width=20% height=20%>
 
 ### Linkki esimerkkikoodiin
 Käytimme työn pohjana valmista GitHub repositoriota, mutta lisäsimme siihen itse uusia näkymiä ja ominaisuuksia. Lisäsimme muun muassa rekisteröinnin ja kirjautumisen, suosikki näkymän ja suosikkien merkkaamisen ja random elokuva painikkeen. Valitsimme pohjan sillä perusteella, että se hyöndynsi samaa APIa, jota halusimme käyttää työssä.
