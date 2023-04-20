@@ -55,13 +55,36 @@ class FirebaseHelper {
     final userFavoritesRef =
         firebaseRef.child('users').child(userId).child('favorites');
 
+    // Get a list of titles for the current favorites in the database
+    final snapshot = await userFavoritesRef.once();
+    final List<String> currentTitles = [];
+    if (snapshot.snapshot.value != null && snapshot.snapshot.value is Map) {
+      final dynamic data = snapshot.snapshot.value;
+      data.forEach((key, value) {
+        final movie = Movie.fromJson(json.decode(json.encode(value)));
+        currentTitles.add(movie.title.replaceAll('.', '-'));
+      });
+    }
+
     // Set each movie as a child node of the favorites node with the title as the key
     for (final movie in favorites) {
       final title = movie.title.replaceAll('.', '-');
       final movieRef = userFavoritesRef.child(title);
-      print('Updating movie: $title, ${movie.toJson()}');
-      await movieRef.set(movie.toJson());
+      if (currentTitles.contains(title)) {
+        await movieRef.set(movie.toJson());
+        currentTitles
+            .remove(title); // remove the title from the current titles list
+      } else {
+        await movieRef.remove(); // remove movie from the database
+      }
     }
+
+    // Remove any movies that were not in the updated list
+    for (final title in currentTitles) {
+      final movieRef = userFavoritesRef.child(title);
+      await movieRef.remove();
+    }
+
     print('Favorites updated successfully');
   }
 }
