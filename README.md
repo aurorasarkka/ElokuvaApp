@@ -23,8 +23,7 @@ Valitsimme käyttää työssä TMDB:n APIa, koska se oli ilmainen ja siihen löy
 Käytämme Firebasea käyttäjien tallentamiseen,sekä rekisteröinnin ja kirjautumisen validointiin. Lisäksi tallennamme jokaisen käyttäjän suosikit-listan Firebase Realtime tietokantaan, mistä tiedot haetaan sovellukseen suosikit näkymään. 
 
 ### Näkymät
-- Etusivu
-![Etusivu](Kuvakaappaukset/Etusivu.jpeg)
+![Etusivu](Kuvakaappaukset/Etusivu.jpeg "Etusivu" {width=40px height=400px})
 - Rekisteröinti
 - Kirjautuminen + kirjautunut käyttäjä
 - Elokuvan info/tiedot
