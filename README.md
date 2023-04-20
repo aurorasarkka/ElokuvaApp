@@ -24,7 +24,7 @@ Käytämme Firebasea käyttäjien tallentamiseen,sekä rekisteröinnin ja kirjau
 
 ### Näkymät
 - Etusivu
-![etusivu](Kuvakaappaukset/Etusivu.jpeg
+![Etusivu](Kuvakaappaukset/Etusivu.jpeg)
 - Rekisteröinti
 - Kirjautuminen + kirjautunut käyttäjä
 - Elokuvan info/tiedot
