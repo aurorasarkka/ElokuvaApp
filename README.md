@@ -1,6 +1,6 @@
 # Elokuva App (Oona & Aurora)
 
-Tämä sovellus tarjoaa käyttäjille mahdollisuuden selata elokuvia, etsiä elokuvia nimeltä, lisätä niitä suosikkeihin ja poistaa niitä, rekisteröityä ja kirjautua sisään, sekä löytää satunnaisen elokuvan erillisellä painikkeella. Suuri osa sovelluksen ominaisuuksista on vain kirjautuneille käyttäjille, mistä sovellus ilmoittaa snackbar ilmoitusten muodossa. 
+Tämä sovellus tarjoaa käyttäjille mahdollisuuden selata elokuvia, etsiä elokuvia nimeltä, lisätä niitä suosikkeihin ja poistaa niitä, rekisteröityä ja kirjautua sisään, sekä löytää satunnaisen elokuvan erillisellä painikkeella. Suuri osa sovelluksen ominaisuuksista on vain kirjautuneille käyttäjille, mistä sovellus ilmoittaa snackbar ilmoitusten muodossa. Sovelluksen käyttäminen mobiililaitteella on suositeltavaa, sillä emulaattorilla testatessa kaikki ominaisuudet eivät toimineet oikein. 
 
 ### Ominaisuudet: 
 - Rekisteröinti ja kirjautuminen
@@ -24,7 +24,7 @@ Käytämme Firebasea käyttäjien tallentamiseen,sekä rekisteröinnin ja kirjau
 
 ### Näkymät
 - Etusivu
-- Rekisteröinti
+- Rekisteröinti (latausnäkymä jää jumiin, mutta siitä voi poistua nuolen avulla)
 - Kirjautuminen
 - Kirjautunut käyttäjä
 - Elokuvan info/tiedot
