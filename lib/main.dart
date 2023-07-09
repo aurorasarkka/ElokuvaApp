@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<Movie> fetchRandomMovie() async {
     final response = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/movie/top_rated?api_key=af7dcb5d262bb63669ebdb759100da85'));
+        'https://api.themoviedb.org/3/movie/top_rated?api_key=API KEY'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseBody = json.decode(response.body);
       final List<dynamic> results = responseBody['results'];
